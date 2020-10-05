@@ -1,5 +1,5 @@
 /*
-hugo cesar aguagallo carrillo
+	hugo cesar aguagallo carrillo
 washington fernando leon boada
 jaime eduardo alban marcillo
 ramirez uruchima cristina nicole
@@ -36,7 +36,7 @@ public class Main{
 		MarcoPrincipal miMarco = new MarcoPrincipal(dbAdmin);
 		miMarco.setVisible(true);
 		 
-		
+		//GitHub
 		/*//Con arraylist
 		DBAdministradores dbAD = new DBAdministradores();
 		DBCliente dbCL = new DBCliente();
