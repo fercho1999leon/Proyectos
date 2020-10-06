@@ -31,15 +31,20 @@ public class LaminaMenuCliente extends JPanel{
 	private PagoServicios laminaServicio;
 	private LPanelCentral laminaCentral;
 	private ModeloTransfer lmaTDirecta,lmaTInterB;
+	private ModeloMovimientoD laminaDeposito,laminaRetiro;
 	final static String vtnServicio = "VtnServicio";
 	final static String vtnPresentacion = "VtnPresentacion";
 	final static String vtnTDirecta = "VtnTDirecta";
 	final static String vtnTInterB = "VtnTInterB";
+	final static String vtnMDeposito = "VtnMDeposito";
+	final static String vtnMRetiro = "VtnMRetiro";
 	
 	public LaminaMenuCliente(JFrame marcoP) {
 		laminaServicio = new PagoServicios();
 		lmaTDirecta = new ModeloTransfer(new oyenteTDirecta(),"TRANSFERENCIA DIERECTA");
 		lmaTInterB = new ModeloTransfer(new oyenteTInter(),"TRANSFERENCIA INTER BANCARIA");
+		laminaDeposito = new ModeloMovimientoD(null,"DEPOSITO DE DINERO","DEPOSITAR");
+		laminaRetiro = new ModeloMovimientoD(null,"RETIRO DE DINERO","RETIRAR");
 		laminaCentral = new LPanelCentral();
 		setLayout(new BorderLayout());
 		laminaTemp = new LaminaMenuAdmin(marcoP,null);
@@ -138,6 +143,24 @@ public class LaminaMenuCliente extends JPanel{
 				public void actionPerformed(ActionEvent arg0) {
 					CardLayout c1 = (CardLayout)laminaCentral.getLayout();
 					c1.show(laminaCentral,vtnTInterB);
+				}
+				
+			});
+			btnDeposito.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					CardLayout c1 = (CardLayout)laminaCentral.getLayout();
+					c1.show(laminaCentral,vtnMDeposito);
+				}
+				
+			});
+			btnRetiro.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					CardLayout c1 = (CardLayout)laminaCentral.getLayout();
+					c1.show(laminaCentral,vtnMRetiro);
 				}
 				
 			});
@@ -248,6 +271,8 @@ public class LaminaMenuCliente extends JPanel{
 			add(laminaServicio,vtnServicio);
 			add(lmaTDirecta,vtnTDirecta);
 			add(lmaTInterB,vtnTInterB);
+			add(laminaDeposito,vtnMDeposito);
+			add(laminaRetiro,vtnMRetiro);
 
 		}
 	}

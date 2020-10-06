@@ -5,10 +5,8 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.*;
-
 import javax.swing.*;
-import javax.swing.event.AncestorEvent;
-import javax.swing.event.AncestorListener;
+
 public class ModeloTransfer extends JPanel{
 	/**
 	 * 
@@ -29,6 +27,7 @@ public class ModeloTransfer extends JPanel{
 	private JLabel lbDatOrigen,lbDatDestino,lbDatCantidadT;
 	
 	public ModeloTransfer(ActionListener oyente,String titulo){
+		color = new Color(0, 39, 56);
 		lbDatOrigen = new JLabel();
 		lbDatOrigen.setVisible(false);
 		lbDatOrigen.setForeground(new Color(255, 255, 255));
@@ -124,7 +123,6 @@ public class ModeloTransfer extends JPanel{
 		tipoPago1.addItem("CUENTA");
 		tipoPago1.addItem("TARJETA");
 		tipoPago1.addItem("CEDULA");
-		tipoPago1.setBounds(5, 250, 100, 30);
 		tipoPago1.addActionListener(new ActionListener() {
 
 			@Override
@@ -143,7 +141,6 @@ public class ModeloTransfer extends JPanel{
 			
 		});
 		
-		color = new Color(0, 39, 56);
 		setBackground(color);
 		JPanel P = new JPanel();
 		setLayout(new BoxLayout(ModeloTransfer.this,BoxLayout.Y_AXIS));
