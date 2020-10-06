@@ -1,10 +1,13 @@
 package interfazGrafica.marcoGUI;
 import javax.swing.*;
 
+import com.sun.awt.AWTUtilities;
+
 import BASEDEDATOS.DBCliente;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.geom.RoundRectangle2D;
 /*
  * Tipo azul oscuro RGB : r34, g79, b98	HEX: 22F62
  * Tipo celeste claro RGB : r7, g115, b157  HEX: 2298CB
@@ -80,9 +83,13 @@ public class LaminaMenuAdmin extends JPanel{
 				public void actionPerformed(ActionEvent e) {
 					if(control) {
 						marcoP.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+						Shape forma = new RoundRectangle2D.Double(0, 0, marcoP.getBounds().width, marcoP.getBounds().height, 30, 30);
+						AWTUtilities.setWindowShape(marcoP, forma);
 						control = false;
 					}else {
 						marcoP.setExtendedState(JFrame.NORMAL); 
+						Shape forma = new RoundRectangle2D.Double(0, 0, marcoP.getBounds().width, marcoP.getBounds().height, 30, 30);
+						AWTUtilities.setWindowShape(marcoP, forma);
 						control = true;
 					}
 				}
