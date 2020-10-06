@@ -43,7 +43,7 @@ public class LaminaMenuCliente extends JPanel{
 		laminaServicio = new PagoServicios();
 		lmaTDirecta = new ModeloTransfer(new oyenteTDirecta(),"TRANSFERENCIA DIERECTA");
 		lmaTInterB = new ModeloTransfer(new oyenteTInter(),"TRANSFERENCIA INTER BANCARIA");
-		laminaDeposito = new ModeloMovimientoD(null,"DEPOSITO DE DINERO","DEPOSITAR");
+		laminaDeposito = new ModeloMovimientoD(new oyenteMDeposito(),"DEPOSITO DE DINERO","DEPOSITAR");
 		laminaRetiro = new ModeloMovimientoD(new oyenteMRetiro(),"RETIRO DE DINERO","RETIRAR");
 		laminaCentral = new LPanelCentral();
 		setLayout(new BorderLayout());
@@ -311,8 +311,8 @@ public class LaminaMenuCliente extends JPanel{
 						laminaRetiro.getLbDatCantidadT().setVisible(false);
 					}
 				}else if(opc1 == 1) {
-					nT = lmaTDirecta.getNumeroTarjeta1().getText();
-					nClave = lmaTDirecta.getClaveTarjeta1().getText();
+					nT = laminaRetiro.getNumeroTarjeta1().getText();
+					nClave = laminaRetiro.getClaveTarjeta1().getText();
 					if(validacion.AutentificacionTarjeta(nT, nClave, db)) {
 						if(retiro.Cajero(nT, nClave, cantidad, db)) {
 							dbCliente.setCliente(db);
@@ -320,7 +320,7 @@ public class LaminaMenuCliente extends JPanel{
 							laminaRetiro.getTituloR().setVisible(true);
 							laminaRetiro.getTituloR().setText("EL RETIRO FUE EXITOSO");
 							laminaRetiro.getLbDatCuenta().setVisible(true);
-							laminaRetiro.getLbDatCuenta().setText("CUENTA DE ORIGEN: "+nC1);
+							laminaRetiro.getLbDatCuenta().setText("TARJETA DE ORIGEN: "+nT);
 							laminaRetiro.getLbDatCantidadT().setVisible(true);
 							laminaRetiro.getLbDatCantidadT().setText("CANTIDAD RETIRADA: "+String.valueOf(cantidad));
 						}else {
@@ -332,7 +332,7 @@ public class LaminaMenuCliente extends JPanel{
 					}else {
 						laminaRetiro.getTituloR().setVisible(false);
 						laminaRetiro.getLbDatCuenta().setVisible(true);
-						laminaRetiro.getLbDatCuenta().setText("ERROR EN LA CUENTA "+nC1);
+						laminaRetiro.getLbDatCuenta().setText("ERROR EN LA TARJETA "+nT);
 						laminaRetiro.getLbDatCantidadT().setVisible(false);
 					}
 				}
@@ -345,7 +345,75 @@ public class LaminaMenuCliente extends JPanel{
 			
 		}
 	}
-	
+	private class oyenteMDeposito implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			String nC1 = null , nT = null, nClave = null;
+			DBCliente dbCliente = conectInput ();
+			Autentificacion validacion = new Autentificacion();
+			int opc1 = laminaDeposito.getFormaMovimiento().getSelectedIndex();
+			int cantidad = (int)laminaDeposito.getCantidad().getValue();
+			Deposito deposito = new Deposito();
+			if(dbCliente != null) {
+				ArrayList<Cliente> db = dbCliente.getCliente();
+				if(opc1 == 0) {
+					nC1 = laminaDeposito.getNumeroCuenta1().getText();
+					if(validacion.AutentificacionCuenta(nC1, db, true)) {
+						if(deposito.Directo(nC1, cantidad, db, true)) {
+							dbCliente.setCliente(db);
+							conectOut(dbCliente);
+							laminaDeposito.getTituloR().setVisible(true);
+							laminaDeposito.getTituloR().setText("EL DEPOSITO FUE EXITOSO");
+							laminaDeposito.getLbDatCuenta().setVisible(true);
+							laminaDeposito.getLbDatCuenta().setText("CUENTA DE ORIGEN: "+nC1);
+							laminaDeposito.getLbDatCantidadT().setVisible(true);
+							laminaDeposito.getLbDatCantidadT().setText("CANTIDAD DEPOSITADA: "+String.valueOf(cantidad));
+						}else {
+							laminaDeposito.getTituloR().setVisible(false);
+							laminaDeposito.getLbDatCuenta().setVisible(true);
+							laminaDeposito.getLbDatCuenta().setText("ERROR EN EL DEPOSITO");
+							laminaDeposito.getLbDatCantidadT().setVisible(false);
+						}
+					}else {
+						laminaDeposito.getTituloR().setVisible(false);
+						laminaDeposito.getLbDatCuenta().setVisible(true);
+						laminaDeposito.getLbDatCuenta().setText("ERROR EN LA CUENTA "+nC1);
+						laminaDeposito.getLbDatCantidadT().setVisible(false);
+					}
+				}else if(opc1 == 1) {
+					nT = laminaDeposito.getNumeroTarjeta1().getText();
+					nClave = laminaDeposito.getClaveTarjeta1().getText();
+					if(validacion.AutentificacionTarjeta(nT, nClave, db)) {
+						if(deposito.Cajero(nT, nClave, cantidad, db)) {
+							dbCliente.setCliente(db);
+							conectOut(dbCliente);
+							laminaDeposito.getTituloR().setVisible(true);
+							laminaDeposito.getTituloR().setText("EL DEPOSITO FUE EXITOSO");
+							laminaDeposito.getLbDatCuenta().setVisible(true);
+							laminaDeposito.getLbDatCuenta().setText("CUENTA DE ORIGEN: "+nC1);
+							laminaDeposito.getLbDatCantidadT().setVisible(true);
+							laminaDeposito.getLbDatCantidadT().setText("CANTIDAD DEPOSITADA: "+String.valueOf(cantidad));
+						}else {
+							laminaDeposito.getTituloR().setVisible(false);
+							laminaDeposito.getLbDatCuenta().setVisible(true);
+							laminaDeposito.getLbDatCuenta().setText("ERROR EN EL DEPOSITO");
+							laminaDeposito.getLbDatCantidadT().setVisible(false);
+						}
+					}else {
+						laminaDeposito.getTituloR().setVisible(false);
+						laminaDeposito.getLbDatCuenta().setVisible(true);
+						laminaDeposito.getLbDatCuenta().setText("ERROR EN LA CUENTA "+nC1);
+						laminaDeposito.getLbDatCantidadT().setVisible(false);
+					}
+				}
+			}else {
+				laminaDeposito.getTituloR().setVisible(false);
+				laminaDeposito.getLbDatCuenta().setVisible(true);
+				laminaDeposito.getLbDatCuenta().setText("ERROR EN LA BASE DE DATOS");
+				laminaDeposito.getLbDatCantidadT().setVisible(false);
+			}
+			
+		}
+	}
 	private class oyenteTDirecta implements ActionListener{
 
 		@Override
