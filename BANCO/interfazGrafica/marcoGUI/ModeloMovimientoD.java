@@ -26,9 +26,12 @@ public class ModeloMovimientoD extends JPanel{
 		cajaVerticalShow = new JPanel();
 		cajaVerticalShow.setBackground(color);
 		cajaVerticalShow.setLayout(new BoxLayout(cajaVerticalShow,BoxLayout.Y_AXIS));
-		createLabel (tituloR, 13 ,cajaVerticalShow);
-		createLabel (lbDatCuenta, 13 ,cajaVerticalShow);
-		createLabel (lbDatCantidadT, 13 ,cajaVerticalShow);
+		tituloR = createLabel (13);
+		lbDatCuenta = createLabel (13);
+		lbDatCantidadT = createLabel (13);
+		cajaVerticalShow.add(tituloR);
+		cajaVerticalShow.add(lbDatCuenta);
+		cajaVerticalShow.add(lbDatCantidadT);
 		
 		lmaPrincipal1 = new JPanel();
 		lmaPrincipal1.setBounds(5, 300, 400, 100);
@@ -101,13 +104,13 @@ public class ModeloMovimientoD extends JPanel{
 		cajaVertical.add(lmaPrincipal1);
 		cajaVertical.add(addComponent ("CANTIDAD DE DINERO A "+tituloTMovimiento, cantidad));
 		btnAcion = createBtn("interfazGrafica/recursos/btnRDDienro.png",50 ,50);
-		btnAcion.addActionListener(oyente);
 		cajaVertical.add(addComponent (tituloTMovimiento, btnAcion));
 		P.add(cajaVertical);
 		P.add(Box.createHorizontalStrut(50));
 		P.add(cajaVerticalShow);
 		P.add(Box.createHorizontalStrut(50));
 		add(P);
+		btnAcion.addActionListener(oyente);
 		
 	}
 	class oyenteSpinne extends  MouseAdapter{
@@ -138,12 +141,12 @@ public class ModeloMovimientoD extends JPanel{
 		}
 		return temp;
 	}
-	private void createLabel (JLabel l, int t, JPanel p) {
-		l = new JLabel();
+	private JLabel createLabel (int t) {
+		JLabel l = new JLabel();
 		l.setVisible(false);
 		l.setForeground(new Color(255, 255, 255));
 		l.setFont(new Font("Andale Mono", 1, t));
-		p.add(l);
+		return l;
 	}
 	private JButton createBtn(String ruta,int ancho, int alto) {
 		JButton btn = new JButton();
