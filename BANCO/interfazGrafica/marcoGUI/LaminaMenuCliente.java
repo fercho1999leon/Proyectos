@@ -279,8 +279,23 @@ public class LaminaMenuCliente extends JPanel{
 								lmaTDirecta.getLbDatCantidadT().setVisible(true);
 								lmaTDirecta.getLbDatCantidadT().setText("CANTIDAD TRANSFERIDA: "+String.valueOf(cantidad));
 								JOptionPane.showMessageDialog(null, "TRANSFERENCIA EXITOSA");
+							}else {
+								lmaTDirecta.getLbDatOrigen().setVisible(false);
+								lmaTDirecta.getLbDatDestino().setVisible(true);
+								lmaTDirecta.getLbDatDestino().setText("ERROR EN LA CUENTA "+nC2);
+								lmaTDirecta.getLbDatCantidadT().setVisible(false);
 							}
+						}else {
+							lmaTDirecta.getLbDatOrigen().setVisible(false);
+							lmaTDirecta.getLbDatDestino().setVisible(true);
+							lmaTDirecta.getLbDatDestino().setText("SALDO INSUFICIENTE");
+							lmaTDirecta.getLbDatCantidadT().setVisible(false);
 						}
+					}else {
+						lmaTDirecta.getLbDatOrigen().setVisible(false);
+						lmaTDirecta.getLbDatDestino().setVisible(true);
+						lmaTDirecta.getLbDatDestino().setText("ERROR EN LA CUENTA "+nC1);
+						lmaTDirecta.getLbDatCantidadT().setVisible(false);
 					}
 				}else if(opc1 == 1) {
 					nT = lmaTDirecta.getNumeroTarjeta1().getText();
@@ -298,10 +313,25 @@ public class LaminaMenuCliente extends JPanel{
 								lmaTDirecta.getLbDatCantidadT().setVisible(true);
 								lmaTDirecta.getLbDatCantidadT().setText("CANTIDAD TRANSFERIDA: "+String.valueOf(cantidad));
 								JOptionPane.showMessageDialog(null, "TRANSFERENCIA EXITOSA");
+							}else {
+								lmaTDirecta.getLbDatOrigen().setVisible(false);
+								lmaTDirecta.getLbDatDestino().setVisible(true);
+								lmaTDirecta.getLbDatDestino().setText("ERROR EN LA CUENTA "+nC2);
+								lmaTDirecta.getLbDatCantidadT().setVisible(false);
 							}
+						}else {
+							lmaTDirecta.getLbDatOrigen().setVisible(false);
+							lmaTDirecta.getLbDatDestino().setVisible(true);
+							lmaTDirecta.getLbDatDestino().setText("SALDO INSUFICIENTE");
+							lmaTDirecta.getLbDatCantidadT().setVisible(false);
 						}
+					}else {
+						lmaTDirecta.getLbDatOrigen().setVisible(false);
+						lmaTDirecta.getLbDatDestino().setVisible(true);
+						lmaTDirecta.getLbDatDestino().setText("ERROR EN LA CUENTA "+nC1);
+						lmaTDirecta.getLbDatCantidadT().setVisible(false);
 					}
-				}else {
+				}else if(opc1 == 2){
 					nDNI = lmaTDirecta.getNumeroCedula1().getText();
 					if(validacion.AutentificacionCedula(nDNI, db)) {
 						if(retiro.Directo(nDNI, cantidad, db)) {
@@ -316,10 +346,30 @@ public class LaminaMenuCliente extends JPanel{
 								lmaTDirecta.getLbDatCantidadT().setVisible(true);
 								lmaTDirecta.getLbDatCantidadT().setText("CANTIDAD TRANSFERIDA: "+String.valueOf(cantidad));
 								JOptionPane.showMessageDialog(null, "TRANSFERENCIA EXITOSA");
+							}else {
+								lmaTDirecta.getLbDatOrigen().setVisible(false);
+								lmaTDirecta.getLbDatDestino().setVisible(true);
+								lmaTDirecta.getLbDatDestino().setText("ERROR EN LA CUENTA "+nC2);
+								lmaTDirecta.getLbDatCantidadT().setVisible(false);
 							}
+						}else {
+							lmaTDirecta.getLbDatOrigen().setVisible(false);
+							lmaTDirecta.getLbDatDestino().setVisible(true);
+							lmaTDirecta.getLbDatDestino().setText("SALDO INSUFICIENTE");
+							lmaTDirecta.getLbDatCantidadT().setVisible(false);
 						}
+					}else {
+						lmaTDirecta.getLbDatOrigen().setVisible(false);
+						lmaTDirecta.getLbDatDestino().setVisible(true);
+						lmaTDirecta.getLbDatDestino().setText("ERROR EN LA CUENTA "+nC1);
+						lmaTDirecta.getLbDatCantidadT().setVisible(false);
 					}
 				}
+			}else {
+				lmaTDirecta.getLbDatOrigen().setVisible(false);
+				lmaTDirecta.getLbDatDestino().setVisible(true);
+				lmaTDirecta.getLbDatDestino().setText("ERROR EN LA BASE DE DATOS");
+				lmaTDirecta.getLbDatCantidadT().setVisible(false);
 			}
 			
 		}
@@ -351,7 +401,17 @@ public class LaminaMenuCliente extends JPanel{
 							lmaTInterB.getLbDatCantidadT().setVisible(true);
 							lmaTInterB.getLbDatCantidadT().setText("CANTIDAD TRANSFERIDA: "+String.valueOf(cantidad));
 							JOptionPane.showMessageDialog(null, "TRANSFERENCIA EXITOSA");
+						}else {
+							lmaTInterB.getLbDatOrigen().setVisible(false);
+							lmaTInterB.getLbDatDestino().setVisible(true);
+							lmaTInterB.getLbDatDestino().setText("SALDO INSUFICIENTE");
+							lmaTInterB.getLbDatCantidadT().setVisible(false);
 						}
+					}else {
+						lmaTInterB.getLbDatOrigen().setVisible(false);
+						lmaTInterB.getLbDatDestino().setVisible(true);
+						lmaTInterB.getLbDatDestino().setText("ERROR EN LA CUENTA "+nC1);
+						lmaTInterB.getLbDatCantidadT().setVisible(false);
 					}
 				}else if(opc1 == 1) {
 					nT = lmaTInterB.getNumeroTarjeta1().getText();
@@ -368,9 +428,19 @@ public class LaminaMenuCliente extends JPanel{
 							lmaTInterB.getLbDatCantidadT().setVisible(true);
 							lmaTInterB.getLbDatCantidadT().setText("CANTIDAD TRANSFERIDA: "+String.valueOf(cantidad));
 							JOptionPane.showMessageDialog(null, "TRANSFERENCIA EXITOSA");
+						}else {
+							lmaTInterB.getLbDatOrigen().setVisible(false);
+							lmaTInterB.getLbDatDestino().setVisible(true);
+							lmaTInterB.getLbDatDestino().setText("SALDO INSUFICIENTE");
+							lmaTInterB.getLbDatCantidadT().setVisible(false);
 						}
+					}else {
+						lmaTInterB.getLbDatOrigen().setVisible(false);
+						lmaTInterB.getLbDatDestino().setVisible(true);
+						lmaTInterB.getLbDatDestino().setText("ERROR EN LA TARJETA "+nT);
+						lmaTInterB.getLbDatCantidadT().setVisible(false);
 					}
-				} else {
+				}else if(opc1 == 2) {
 					nDNI = lmaTInterB.getNumeroCedula1().getText();
 					if (validacion.AutentificacionCedula(nDNI, db)) {
 						if (retiro.Directo(nDNI, cantidad, db)) {
@@ -384,9 +454,24 @@ public class LaminaMenuCliente extends JPanel{
 							lmaTInterB.getLbDatCantidadT().setVisible(true);
 							lmaTInterB.getLbDatCantidadT().setText("CANTIDAD TRANSFERIDA: " + String.valueOf(cantidad));
 							JOptionPane.showMessageDialog(null, "TRANSFERENCIA EXITOSA");
+						}else {
+							lmaTInterB.getLbDatOrigen().setVisible(false);
+							lmaTInterB.getLbDatDestino().setVisible(true);
+							lmaTInterB.getLbDatDestino().setText("SALDO INSUFICIENTE");
+							lmaTInterB.getLbDatCantidadT().setVisible(false);
 						}
+					}else {
+						lmaTInterB.getLbDatOrigen().setVisible(false);
+						lmaTInterB.getLbDatDestino().setVisible(true);
+						lmaTInterB.getLbDatDestino().setText("ERROR EN LA CEDULA "+nDNI);
+						lmaTInterB.getLbDatCantidadT().setVisible(false);
 					}
 				}
+			}else {
+				lmaTInterB.getLbDatOrigen().setVisible(false);
+				lmaTInterB.getLbDatDestino().setVisible(true);
+				lmaTInterB.getLbDatDestino().setText("ERROR EN LA BASE DE DATOS");
+				lmaTInterB.getLbDatCantidadT().setVisible(false);
 			}
 			
 		}
@@ -401,16 +486,7 @@ public class LaminaMenuCliente extends JPanel{
 			InStreamdbClientes.close();
 			System.out.println("Archivo cliente encontrado");
 		}catch(Exception ex) {
-			try {
-				dbCliente = new DBCliente();
-				ObjectOutputStream OutStreamdbClientes = new ObjectOutputStream(new FileOutputStream(direcciondbClientes));
-				OutStreamdbClientes.writeObject(dbCliente);
-				OutStreamdbClientes.close();
-				System.out.println("Archivo cliente nuevo");
-			}catch(Exception i) {
-				dbCliente = new DBCliente();
-				System.out.println("Error al guardar el archivo clientes.");
-			}
+			System.out.println("Archivo no encontrado");
 		}
 		return dbCliente;
 	}

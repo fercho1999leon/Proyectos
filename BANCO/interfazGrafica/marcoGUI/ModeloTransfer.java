@@ -4,10 +4,11 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
 import javax.swing.*;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
 public class ModeloTransfer extends JPanel{
 	/**
 	 * 
@@ -152,7 +153,7 @@ public class ModeloTransfer extends JPanel{
 		cajaVertical.setBackground(color);
 		cajaVertical.setLayout(new BoxLayout(cajaVertical,BoxLayout.Y_AXIS));
 		cantidad = new JSpinner();
-		cantidad.setValue(100);
+		cantidad.addMouseListener(new oyenteSpinne());
 		add(new LogoPresentacion(titulo));
 		cajaVertical.add(addComponent ("CLIENTE DE ORIGEN", null));
 		cajaVertical.add(tipoPago1);
@@ -168,6 +169,21 @@ public class ModeloTransfer extends JPanel{
 		P.add(cajaVerticalShow);
 		P.add(Box.createHorizontalStrut(50));
 		add(P);
+		
+	}
+	class oyenteSpinne extends  MouseAdapter{
+		public void mousePressed(MouseEvent e) {
+			cantidad.setVisible(false);
+			cantidad.setVisible(true);
+		}
+		public void mouseEntered(MouseEvent e) {
+			cantidad.setVisible(false);
+			cantidad.setVisible(true);
+		}
+		public void mouseExited(MouseEvent e) {
+			cantidad.setVisible(false);
+			cantidad.setVisible(true);
+		}
 		
 	}
 	private <T> JPanel addComponent (String name, T comp) {
