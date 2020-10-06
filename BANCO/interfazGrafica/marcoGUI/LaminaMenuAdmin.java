@@ -22,11 +22,14 @@ public class LaminaMenuAdmin extends JPanel{
 	private JButton btnServicio;
 	private LMACreacion LCreacion;
 	private LPanelCentral laminaCentral;
+	private LMASConsultas laminaConsulta;
 	final static String v1 = "VtnCreacion";
 	final static String v2 = "VtnPresentacion";
+	final static String v3 = "VtnConsultas";
 	Dimension tamanoPantalla;
 	JFrame marcoP;
 	public LaminaMenuAdmin(JFrame marcoP,DBCliente dbCliente) {
+		laminaConsulta = new LMASConsultas();
 		btnCrear = new JButton();
 		btnServicio = new JButton();
 		btnAtras = new JButton();
@@ -177,6 +180,17 @@ public class LaminaMenuAdmin extends JPanel{
 				}
 				
 			});
+			btnServicio.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					CardLayout c1 = (CardLayout)laminaCentral.getLayout();
+					c1.show(laminaCentral,v3);
+					LCreacion.clearData();
+				}
+				
+			});
+			
 			
 			//Agrega componentes del panel izquierdo 
 			JPanel comp = new JPanel();
@@ -230,6 +244,7 @@ public class LaminaMenuAdmin extends JPanel{
 			setLayout(new CardLayout(0,0));
 			add(new LMAPresentacion("interfazGrafica/recursos/presentacion.png",7, 115, 157),v2);
 			add(LCreacion,v1);
+			add(laminaConsulta,v3);
 		}
 	}
 	
