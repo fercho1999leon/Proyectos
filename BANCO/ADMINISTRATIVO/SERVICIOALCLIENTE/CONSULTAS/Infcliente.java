@@ -1,6 +1,8 @@
 package ADMINISTRATIVO.SERVICIOALCLIENTE.CONSULTAS;
 import java.util.ArrayList;
 
+import javax.swing.JTextArea;
+
 import ADMINISTRATIVO.*;
 import ADMINISTRATIVO.CREACION.*;
 public class Infcliente extends Autentificacion{
@@ -22,8 +24,12 @@ public class Infcliente extends Autentificacion{
 			}
 		}
 	}
-	public void MostraDatos(String DNI,ArrayList<Cliente> ClienteStatus){ //Solo se consulta por cedula del cliente
+	public void MostraDatos(String DNI,ArrayList<Cliente> ClienteStatus, JTextArea print){ //Solo se consulta por cedula del cliente
 		if(AutentificacionCedula (DNI,ClienteStatus)){
+			print.append("\n1. Nombre del cliente: "+ClienteDatos.getNombre());
+			
+			
+			
 			System.out.println("1. Nombre del cliente: "+ClienteDatos.getNombre());
 			System.out.println("2. Numero de cedula: "+ClienteDatos.getDNI());
 			System.out.println("3. Direccion domiciliaria: "+ClienteDatos.getDireccion());

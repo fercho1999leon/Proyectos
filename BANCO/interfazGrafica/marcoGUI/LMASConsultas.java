@@ -8,6 +8,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import ADMINISTRATIVO.SERVICIOALCLIENTE.CONSULTAS.Infcliente;
+
 public class LMASConsultas extends JPanel{
 	/**
 	 * 
@@ -24,7 +26,7 @@ public class LMASConsultas extends JPanel{
 		color = new Color(7, 115, 157);
 		setBackground(color);
 		setLayout(new BoxLayout(LMASConsultas.this,BoxLayout.Y_AXIS));
-		lmaCliente = new LMAModeloConsulta(null,"INGRESE EL NUMERO DE CEDULA ");
+		lmaCliente = new LMAModeloConsulta(new oyenteConsultaCliente(),"INGRESE EL NUMERO DE CEDULA ");
 		lmaCuenta = new LMAModeloConsulta(null,"INGRESE EL NUMERO DE CUENTA");
 		ShowLamina = new JPanel();
 		ShowLamina.setBounds(5, 300, 400, 100);
@@ -79,6 +81,18 @@ public class LMASConsultas extends JPanel{
 			temIcon.add(new JLabel(crearIcono("interfazGrafica/recursos/presentacion.png",150, 150)));
 			add(temIcon);
 		}
+	}
+	private class oyenteConsultaCliente implements ActionListener{
+		private Infcliente consulta;
+		public oyenteConsultaCliente() {
+			consulta = new Infcliente();
+		}
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
 	}
 	private ImageIcon crearIcono(String img, int width ,int height) {
 		ImageIcon icon = new ImageIcon(img);
