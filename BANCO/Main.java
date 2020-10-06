@@ -36,7 +36,7 @@ public class Main{
 		MarcoPrincipal miMarco = new MarcoPrincipal(dbAdmin);
 		miMarco.setVisible(true);
 		 
-		//GitHub
+		//GitHub c
 		/*//Con arraylist
 		DBAdministradores dbAD = new DBAdministradores();
 		DBCliente dbCL = new DBCliente();
