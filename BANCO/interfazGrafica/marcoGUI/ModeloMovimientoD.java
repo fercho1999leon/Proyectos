@@ -18,7 +18,7 @@ public class ModeloMovimientoD extends JPanel{
 	private JTextField NumeroTarjeta1,ClaveTarjeta1,NumeroCuenta1;
 	private static int anchoTxt = 12;
 	private JComboBox<String> FormaMovimiento;
-	private JLabel lbDatOrigen,lbDatDestino,lbDatCantidadT;
+	private JLabel tituloR,lbDatCuenta,lbDatCantidadT;
 	public ModeloMovimientoD(ActionListener oyente, String tituloP, String tituloTMovimiento) {
 		color = new Color(0, 39, 56);
 		setBackground(color);
@@ -26,8 +26,8 @@ public class ModeloMovimientoD extends JPanel{
 		cajaVerticalShow = new JPanel();
 		cajaVerticalShow.setBackground(color);
 		cajaVerticalShow.setLayout(new BoxLayout(cajaVerticalShow,BoxLayout.Y_AXIS));
-		createLabel (lbDatOrigen, 13 ,cajaVerticalShow);
-		createLabel (lbDatDestino, 13 ,cajaVerticalShow);
+		createLabel (tituloR, 13 ,cajaVerticalShow);
+		createLabel (lbDatCuenta, 13 ,cajaVerticalShow);
 		createLabel (lbDatCantidadT, 13 ,cajaVerticalShow);
 		
 		lmaPrincipal1 = new JPanel();
@@ -180,4 +180,54 @@ public class ModeloMovimientoD extends JPanel{
 		ImageIcon icono = new ImageIcon(icon.getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT));
 		return icono;
 	}
+	
+	public JComboBox<String> getFormaMovimiento() {
+		return FormaMovimiento;
+	}
+	public void setFormaMovimiento(JComboBox<String> formaMovimiento) {
+		FormaMovimiento = formaMovimiento;
+	}
+	public JSpinner getCantidad() {
+		return cantidad;
+	}
+	public void setCantidad(JSpinner cantidad) {
+		this.cantidad = cantidad;
+	}
+	public JTextField getNumeroTarjeta1() {
+		return NumeroTarjeta1;
+	}
+	public void setNumeroTarjeta1(JTextField numeroTarjeta1) {
+		NumeroTarjeta1 = numeroTarjeta1;
+	}
+	public JTextField getClaveTarjeta1() {
+		return ClaveTarjeta1;
+	}
+	public void setClaveTarjeta1(JTextField claveTarjeta1) {
+		ClaveTarjeta1 = claveTarjeta1;
+	}
+	public JTextField getNumeroCuenta1() {
+		return NumeroCuenta1;
+	}
+	public void setNumeroCuenta1(JTextField numeroCuenta1) {
+		NumeroCuenta1 = numeroCuenta1;
+	}
+	public JLabel getTituloR() {
+		return tituloR;
+	}
+	public void setTituloR(JLabel tituloR) {
+		this.tituloR = tituloR;
+	}
+	public JLabel getLbDatCuenta() {
+		return lbDatCuenta;
+	}
+	public void setLbDatCuenta(JLabel lbDatCuenta) {
+		this.lbDatCuenta = lbDatCuenta;
+	}
+	public JLabel getLbDatCantidadT() {
+		return lbDatCantidadT;
+	}
+	public void setLbDatCantidadT(JLabel lbDatCantidadT) {
+		this.lbDatCantidadT = lbDatCantidadT;
+	}
+	
 }

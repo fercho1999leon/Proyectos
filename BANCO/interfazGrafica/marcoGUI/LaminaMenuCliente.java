@@ -44,7 +44,7 @@ public class LaminaMenuCliente extends JPanel{
 		lmaTDirecta = new ModeloTransfer(new oyenteTDirecta(),"TRANSFERENCIA DIERECTA");
 		lmaTInterB = new ModeloTransfer(new oyenteTInter(),"TRANSFERENCIA INTER BANCARIA");
 		laminaDeposito = new ModeloMovimientoD(null,"DEPOSITO DE DINERO","DEPOSITAR");
-		laminaRetiro = new ModeloMovimientoD(null,"RETIRO DE DINERO","RETIRAR");
+		laminaRetiro = new ModeloMovimientoD(new oyenteMRetiro(),"RETIRO DE DINERO","RETIRAR");
 		laminaCentral = new LPanelCentral();
 		setLayout(new BorderLayout());
 		laminaTemp = new LaminaMenuAdmin(marcoP,null);
@@ -276,6 +276,76 @@ public class LaminaMenuCliente extends JPanel{
 
 		}
 	}
+	private class oyenteMRetiro implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			String nC1 = null , nT = null, nClave = null;
+			DBCliente dbCliente = conectInput ();
+			Autentificacion validacion = new Autentificacion();
+			int opc1 = laminaRetiro.getFormaMovimiento().getSelectedIndex();
+			int cantidad = (int)laminaRetiro.getCantidad().getValue();
+			Retiro retiro = new Retiro();
+			if(dbCliente != null) {
+				ArrayList<Cliente> db = dbCliente.getCliente();
+				if(opc1 == 0) {
+					nC1 = laminaRetiro.getNumeroCuenta1().getText();
+					if(validacion.AutentificacionCuenta(nC1, db, true)) {
+						if(retiro.Directo(nC1, cantidad, db, true)) {
+							dbCliente.setCliente(db);
+							conectOut(dbCliente);
+							laminaRetiro.getTituloR().setVisible(true);
+							laminaRetiro.getTituloR().setText("EL RETIRO FUE EXITOSO");
+							laminaRetiro.getLbDatCuenta().setVisible(true);
+							laminaRetiro.getLbDatCuenta().setText("CUENTA DE ORIGEN: "+nC1);
+							laminaRetiro.getLbDatCantidadT().setVisible(true);
+							laminaRetiro.getLbDatCantidadT().setText("CANTIDAD RETIRADA: "+String.valueOf(cantidad));
+						}else {
+							laminaRetiro.getTituloR().setVisible(false);
+							laminaRetiro.getLbDatCuenta().setVisible(true);
+							laminaRetiro.getLbDatCuenta().setText("SALDO INSUFICIENTE");
+							laminaRetiro.getLbDatCantidadT().setVisible(false);
+						}
+					}else {
+						laminaRetiro.getTituloR().setVisible(false);
+						laminaRetiro.getLbDatCuenta().setVisible(true);
+						laminaRetiro.getLbDatCuenta().setText("ERROR EN LA CUENTA "+nC1);
+						laminaRetiro.getLbDatCantidadT().setVisible(false);
+					}
+				}else if(opc1 == 1) {
+					nT = lmaTDirecta.getNumeroTarjeta1().getText();
+					nClave = lmaTDirecta.getClaveTarjeta1().getText();
+					if(validacion.AutentificacionTarjeta(nT, nClave, db)) {
+						if(retiro.Cajero(nT, nClave, cantidad, db)) {
+							dbCliente.setCliente(db);
+							conectOut(dbCliente);
+							laminaRetiro.getTituloR().setVisible(true);
+							laminaRetiro.getTituloR().setText("EL RETIRO FUE EXITOSO");
+							laminaRetiro.getLbDatCuenta().setVisible(true);
+							laminaRetiro.getLbDatCuenta().setText("CUENTA DE ORIGEN: "+nC1);
+							laminaRetiro.getLbDatCantidadT().setVisible(true);
+							laminaRetiro.getLbDatCantidadT().setText("CANTIDAD RETIRADA: "+String.valueOf(cantidad));
+						}else {
+							laminaRetiro.getTituloR().setVisible(false);
+							laminaRetiro.getLbDatCuenta().setVisible(true);
+							laminaRetiro.getLbDatCuenta().setText("SALDO INSUFICIENTE");
+							laminaRetiro.getLbDatCantidadT().setVisible(false);
+						}
+					}else {
+						laminaRetiro.getTituloR().setVisible(false);
+						laminaRetiro.getLbDatCuenta().setVisible(true);
+						laminaRetiro.getLbDatCuenta().setText("ERROR EN LA CUENTA "+nC1);
+						laminaRetiro.getLbDatCantidadT().setVisible(false);
+					}
+				}
+			}else {
+				laminaRetiro.getTituloR().setVisible(false);
+				laminaRetiro.getLbDatCuenta().setVisible(true);
+				laminaRetiro.getLbDatCuenta().setText("ERROR EN LA BASE DE DATOS");
+				laminaRetiro.getLbDatCantidadT().setVisible(false);
+			}
+			
+		}
+	}
+	
 	private class oyenteTDirecta implements ActionListener{
 
 		@Override
