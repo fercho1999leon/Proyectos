@@ -1,9 +1,14 @@
 package interfazGrafica.marcoGUI;
-import BASEDEDATOS.*;
+import java.awt.Color;
+import java.awt.GridLayout;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
 import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.io.*;
-import java.awt.*;
+import javax.swing.BorderFactory;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import BASEDEDATOS.DBAdministradores;;
 public class MarcoPrincipal extends JFrame{
 	/**
 	 * 
