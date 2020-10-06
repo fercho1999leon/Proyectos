@@ -41,15 +41,11 @@ public class Infcuenta extends Autentificacion{
 		*/
 		System.out.println("---------------------------------------------------------------------------------------------------------");
 	}
-	public void MostraDatos(String NumeroCuenta,String DNIadmin,String clave, String[][] DB,ArrayList<Cliente> ClienteStatus){ //Solo se consulta por cedula del cliente
-		if(Administrador(DNIadmin,clave,DB)){
-			if(AutentificacionCuenta(NumeroCuenta,ClienteStatus,true)){
-				DibujarTabla();
-			}else{
-				System.out.println("ERROR. a autentificacion de la cuenta");
-			}
+	public void MostraDatos(String NumeroCuenta,ArrayList<Cliente> ClienteStatus){ //Solo se consulta por cedula del cliente
+		if(AutentificacionCuenta(NumeroCuenta,ClienteStatus,true)){
+			DibujarTabla();
 		}else{
-			System.out.println("ERROR. Inicial el administrador");
+			System.out.println("ERROR. a autentificacion de la cuenta");
 		}
 	}
 	

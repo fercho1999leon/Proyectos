@@ -14,7 +14,7 @@ public class UpdateCliente extends Infcliente{
 	public void UpdateDatos(String DNI,String DNIadmin,String clave, String[][] DB,ArrayList<Cliente> ClienteStatus){ //Solo se consulta por cedula del cliente
 		if(Administrador(DNIadmin,clave,DB)){
 			if(AutentificacionCedula (DNI,ClienteStatus)){
-				MostraDatos(DNI,DNIadmin,clave,DB,ClienteStatus);
+				MostraDatos(DNI,ClienteStatus);
 				do{
 					System.out.println("Ingrese el numero del dato que desea actualizar o 5 para salir");
 					OPC = in.nextInt();
@@ -49,7 +49,7 @@ public class UpdateCliente extends Infcliente{
 					}
 				}while(OPC!=5);
 				for(int i = 0;i<60;i++){System.out.println("");}
-				MostraDatos(DNI,DNIadmin,clave,DB,ClienteStatus);
+				MostraDatos(DNI,ClienteStatus);
 			}else{
 				System.out.println("ERROR. a autentificacion del cliente");
 			}

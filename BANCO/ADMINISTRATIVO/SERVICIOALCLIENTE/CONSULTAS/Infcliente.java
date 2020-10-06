@@ -22,19 +22,15 @@ public class Infcliente extends Autentificacion{
 			}
 		}
 	}
-	public void MostraDatos(String DNI,String DNIadmin,String clave, String[][] DB,ArrayList<Cliente> ClienteStatus){ //Solo se consulta por cedula del cliente
-		if(Administrador(DNIadmin,clave,DB)){
-			if(AutentificacionCedula (DNI,ClienteStatus)){
-				System.out.println("1. Nombre del cliente: "+ClienteDatos.getNombre());
-				System.out.println("2. Numero de cedula: "+ClienteDatos.getDNI());
-				System.out.println("3. Direccion domiciliaria: "+ClienteDatos.getDireccion());
-				System.out.println("4. Numero de telefono: "+ClienteDatos.getTelefono());
-				DibujarTabla();
-			}else{
-				System.out.println("ERROR. a autentificacion del cliente");
-			}
+	public void MostraDatos(String DNI,ArrayList<Cliente> ClienteStatus){ //Solo se consulta por cedula del cliente
+		if(AutentificacionCedula (DNI,ClienteStatus)){
+			System.out.println("1. Nombre del cliente: "+ClienteDatos.getNombre());
+			System.out.println("2. Numero de cedula: "+ClienteDatos.getDNI());
+			System.out.println("3. Direccion domiciliaria: "+ClienteDatos.getDireccion());
+			System.out.println("4. Numero de telefono: "+ClienteDatos.getTelefono());
+			DibujarTabla();
 		}else{
-			System.out.println("ERROR. Inicial el administrador");
+			System.out.println("ERROR. a autentificacion del cliente");
 		}
 	}
 	

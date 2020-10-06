@@ -16,7 +16,7 @@ public class UpdateCuenta extends Infcuenta{
 	public void UpdateDatos(String NumeroCuenta,String DNIadmin,String clave, String[][] DB,ArrayList<Cliente> ClienteStatus){ 
 		if(Administrador(DNIadmin,clave,DB)){
 			if(AutentificacionCuenta(NumeroCuenta,ClienteStatus,true)){
-				MostraDatos(NumeroCuenta,DNIadmin,clave,DB,ClienteStatus);
+				MostraDatos(NumeroCuenta,ClienteStatus);
 				do{
 					System.out.println("Ingrese 4 para modificar el apartado de tarjeta");
 					System.out.println("Ingrese el numero del dato que desea actualizar o 5 para salir");
@@ -102,13 +102,13 @@ public class UpdateCuenta extends Infcuenta{
 										break;
 									}
 								}while(OPC!=6);
-								MostraDatos(cuenta.getNumeroCuenta(),DNIadmin,clave,DB,ClienteStatus);
+								MostraDatos(cuenta.getNumeroCuenta(),ClienteStatus);
 							}
 						break;
 					}
 				}while(OPC!=5);
 				for(int i = 0;i<60;i++){System.out.println("");}
-				MostraDatos(cuenta.getNumeroCuenta(),DNIadmin,clave,DB,ClienteStatus);
+				MostraDatos(cuenta.getNumeroCuenta(),ClienteStatus);
 			}else{
 				System.out.println("ERROR. a autentificacion del cuenta");
 			}
