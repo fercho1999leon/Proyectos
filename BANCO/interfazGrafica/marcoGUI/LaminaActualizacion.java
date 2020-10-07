@@ -1,4 +1,5 @@
 package interfazGrafica.marcoGUI;
+
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -22,53 +23,74 @@ import ADMINISTRATIVO.CREACION.GenerarTarjeta;
 import ADMINISTRATIVO.SERVICIOALCLIENTE.CONSULTAS.Infcliente;
 import ADMINISTRATIVO.SERVICIOALCLIENTE.CONSULTAS.Infcuenta;
 import BASEDEDATOS.DBCliente;
-public class LMAEliminacion extends JPanel{
+
+public class LaminaActualizacion extends JPanel {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JPanel cajaVertical;
+	private JPanel cajaVertical,cajaHorizontal,lmaCambio;
 	private Color color;
 	private JTextField NumeroTarjeta,ClaveTarjeta,NumeroCuenta,NumeroCedula;
 	private JPanel lmaPrincipal,lmaTarjeta,lmaCuenta, lmaCliente, lmaBTN;
-	private JComboBox<String> tipoEliminacion;
+	private JComboBox<String> tipoActualizacion;
 	private JTextArea showInfo;
+	private JButton btnUpdate,btnConsulta,btnCancelar;
+	private JLabel lbUpdate,lbTitulo,lbConsultar,lbCancelar;
 	private JScrollPane scrollMostrar;
-	private JButton btnConsulta,btnConfirmacion,btnCancelar;
-	private JLabel lbConsultar,lbConfirEliminar,lbTitulo,lbCancelar;
 	private static int anchoTxt = 12;
+	private LMACcliente laminaCliente;
+	private LMACcuenta laminaCuenta;
+	private LMACtarjeta laminaTarjeta;
 	final static String idTarjeta = "Tarjeta";
 	final static String idCliente = "Cliente";
 	final static String idCuenta = "Cuenta";
-	public LMAEliminacion() {
+	final static String idLaminaTarjeta = "LaminaTarjeta";
+	final static String idLaminaCliente = "LaminaCliente";
+	final static String idLaminaCuenta = "LaminaCuenta";
+	final static String idLaminaPresent = "LaminaPresent";
+	public LaminaActualizacion() {
+		laminaCliente = new LMACcliente();
+		laminaCuenta = new LMACcuenta();
+		laminaTarjeta = new LMACtarjeta();
 		color = new Color(7, 115, 157);
 		setBackground(color);
-		setLayout(new BoxLayout(LMAEliminacion.this,BoxLayout.X_AXIS));
+		setLayout(new BoxLayout(LaminaActualizacion.this,BoxLayout.X_AXIS));
 		cajaVertical = new JPanel();
 		cajaVertical.setLayout(new BoxLayout(cajaVertical,BoxLayout.Y_AXIS));
 		cajaVertical.setBackground(color);
-		showInfo = new JTextArea(20,20);
+		cajaHorizontal = new JPanel();
+		cajaHorizontal.setLayout(new BoxLayout(cajaHorizontal,BoxLayout.X_AXIS));
+		cajaHorizontal.setBackground(color);
+		lmaCambio = new JPanel();
+		lmaCambio.setLayout(new CardLayout(0,0));
+		lmaCambio.setBackground(color);
+		showInfo = new JTextArea(20,50);
 		showInfo.setEnabled(false);
 		scrollMostrar = new JScrollPane(showInfo);
+		btnUpdate = createBTN ("interfazGrafica/recursos/btnConsultar.png",50,50);
+		btnUpdate.setVisible(false);
+		btnUpdate.addActionListener(new oyenteBTNS());
 		btnConsulta = createBTN ("interfazGrafica/recursos/btnConsultar.png",50,50);
-		btnConfirmacion = createBTN ("interfazGrafica/recursos/btnBorrar.png",50,50);
-		btnConfirmacion.setVisible(false);
 		btnConsulta.addActionListener(new oyenteBTNS());
-		btnConfirmacion.addActionListener(new oyenteBTNS());
 		btnCancelar = createBTN ("interfazGrafica/recursos/btnCancelar.png",50,50);
 		btnCancelar.setVisible(false);
 		btnCancelar.addActionListener(new oyenteBTNS());
-		lbConsultar = createLabel (13);
-		lbConfirEliminar = createLabel (13);
-		lbConsultar.setText("PRESIONE PARA BUSCAR");
-		lbConsultar.setVisible(true);
-		lbConfirEliminar.setText("PRESIONE PARA ELIMINAR");
+		lbUpdate = createLabel (13);
+		lbUpdate.setText("PRESIONE PARA ACTUALIZAR");
 		lbTitulo = createLabel (13);
 		lbTitulo.setText("ESTA SELECIONADO LA ELIMINACION DE CLIENTE");
 		lbTitulo.setVisible(true);
+		lbConsultar = createLabel (13);
+		lbConsultar.setText("PRESIONE PARA CONSULTAR");
+		lbConsultar.setVisible(true);
 		lbCancelar = createLabel (13);
 		lbCancelar.setText("PRESIONE PARA CANCELAR");
-		lbCancelar.setVisible(false);
+		
+		lmaCambio.add(new JLabel(crearIcono("interfazGrafica/recursos/iconoPresent.png", 200 ,200)),idLaminaPresent);
+		lmaCambio.add(laminaCliente,idLaminaCliente);
+		lmaCambio.add(laminaCuenta,idLaminaCuenta);
+		lmaCambio.add(laminaTarjeta,idLaminaTarjeta);
 		
 		lmaPrincipal = new JPanel();
 		lmaPrincipal.setLayout(new CardLayout(0,0));
@@ -102,51 +124,56 @@ public class LMAEliminacion extends JPanel{
 		lmaPrincipal.add(lmaTarjeta,idTarjeta);
 		
 		lmaBTN.setLayout(new BoxLayout(lmaBTN,BoxLayout.X_AXIS));
+		lmaBTN.add(lbUpdate);
+		lmaBTN.add(btnUpdate);
 		lmaBTN.add(lbConsultar);
 		lmaBTN.add(btnConsulta);
-		lmaBTN.add(lbConfirEliminar);
-		lmaBTN.add(btnConfirmacion);
 		lmaBTN.add(lbCancelar);
 		lmaBTN.add(btnCancelar);
 		
-		tipoEliminacion = new JComboBox<String>();
-		tipoEliminacion.addItem("CLIENTE");
-		tipoEliminacion.addItem("CUENTA");
-		tipoEliminacion.addItem("TARJETA");
-		tipoEliminacion.addActionListener(new ActionListener() {
+		tipoActualizacion = new JComboBox<String>();
+		tipoActualizacion.addItem("CLIENTE");
+		tipoActualizacion.addItem("CUENTA");
+		tipoActualizacion.addItem("TARJETA");
+		tipoActualizacion.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int opc = tipoEliminacion.getSelectedIndex();
+				int opc = tipoActualizacion.getSelectedIndex();
 				CardLayout c1 = (CardLayout)lmaPrincipal.getLayout();
+				CardLayout c2 = (CardLayout)lmaCambio.getLayout();
 				if(opc == 0) {
+					c1.show(lmaPrincipal,idCliente);
+					c2.show(lmaCambio,idLaminaPresent);
 					clear();
-					lbTitulo.setText("ESTA SELECIONADO LA ELIMINACION DE CLIENTE");
+					lbTitulo.setText("ESTA SELECIONADO LA ACTUALIZACION DE CLIENTE");
 				}else if(opc == 1) {
 					c1.show(lmaPrincipal,idCuenta);
+					c2.show(lmaCambio,idLaminaPresent);
 					clear();
-					lbTitulo.setText("ESTA SELECIONADO LA ELIMINACION DE CUENTA");
+					lbTitulo.setText("ESTA SELECIONADO LA ACTUALIZACION DE CUENTA");
 				}else if(opc == 2) {
 					c1.show(lmaPrincipal,idTarjeta);
+					c2.show(lmaCambio,idLaminaPresent);
 					clear();
-					lbTitulo.setText("ESTA SELECIONADO LA ELIMINACION DE TARJETA");
+					lbTitulo.setText("ESTA SELECIONADO LA ACTUALIZACION DE TARJETA");
 				}
 			}
 			
 		});
-		
-		cajaVertical.add(new LogoPresentacion("ELIMINACION DE DATOS",150,150));
-		cajaVertical.add(addComponent ("INGRESE EL TIPO DE ELIMINACION",null));
-		cajaVertical.add(tipoEliminacion);
+		cajaVertical.add(new LogoPresentacion("ACTUALIZACION DE DATOS",100,100));
+		cajaVertical.add(addComponent ("INGRESE EL TIPO DE ACTUALIZACION",null));
+		cajaVertical.add(tipoActualizacion);
 		cajaVertical.add(addComponent ("",lbTitulo));
 		cajaVertical.add(lmaPrincipal);
-		cajaVertical.add(scrollMostrar);
+		cajaHorizontal.add(lmaCambio);
+		cajaHorizontal.add(Box.createHorizontalStrut(15));
+		cajaHorizontal.add(scrollMostrar);
+		cajaVertical.add(cajaHorizontal);
 		cajaVertical.add(lmaBTN);
 		add(Box.createHorizontalStrut(10));
 		add(cajaVertical);
 		add(Box.createHorizontalStrut(10));
-		
-		
 	}
 	private <T> JPanel addComponent (String name, T comp) {
 		JPanel temp = new JPanel();
@@ -185,10 +212,11 @@ public class LMAEliminacion extends JPanel{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			String nC = null, nDNI = null, nT = null, nClave = null;
+			CardLayout c1 = (CardLayout)lmaCambio.getLayout();
 			Cliente cliente = new Cliente();
 			Cuenta cuenta = new Cuenta();
 			GenerarTarjeta tarjeta;
-			int opc = tipoEliminacion.getSelectedIndex();
+			int opc = tipoActualizacion.getSelectedIndex();
 			Autentificacion validacion = new Autentificacion();
 			if(e.getSource()==btnConsulta) {
 				DBCliente dbCliente = conectInput ();
@@ -202,13 +230,15 @@ public class LMAEliminacion extends JPanel{
 							showInfo.setText("");
 							consulta.MostraDatos(nDNI, db, showInfo);
 							cliente = validacion.getClienteDatos();
-							lbConfirEliminar.setVisible(true);
-							btnConfirmacion.setVisible(true);
+							lbUpdate.setVisible(true);
+							btnUpdate.setVisible(true);
 							lbConsultar.setVisible(false);
 							btnConsulta.setVisible(false);
 							lbCancelar.setVisible(true);
 							btnCancelar.setVisible(true);
+							c1.show(lmaCambio, idLaminaCliente);
 						}else {
+							c1.show(lmaCambio, idLaminaPresent);
 							showInfo.setText("CLIENTE NO ENCONTRADO");
 							NumeroCedula.setEnabled(true);
 						}
@@ -221,13 +251,15 @@ public class LMAEliminacion extends JPanel{
 							consulta.MostraDatos(nC, db, showInfo);
 							cuenta = validacion.getCuenta();
 							cliente = validacion.getClienteDatos();
-							lbConfirEliminar.setVisible(true);
-							btnConfirmacion.setVisible(true);
+							lbUpdate.setVisible(true);
+							btnUpdate.setVisible(true);
 							lbConsultar.setVisible(false);
 							btnConsulta.setVisible(false);
 							lbCancelar.setVisible(true);
 							btnCancelar.setVisible(true);
+							c1.show(lmaCambio, idLaminaCuenta);
 						}else {
+							c1.show(lmaCambio, idLaminaPresent);
 							showInfo.setText("CUENTA NO ENCONTRADA");
 							NumeroCuenta.setEnabled(true);
 						}
@@ -243,20 +275,22 @@ public class LMAEliminacion extends JPanel{
 							tarjeta = validacion.getTarjeta();
 							cuenta = validacion.getCuenta();
 							cliente = validacion.getClienteDatos();
-							lbConfirEliminar.setVisible(true);
-							btnConfirmacion.setVisible(true);
+							lbUpdate.setVisible(true);
+							btnUpdate.setVisible(true);
 							lbConsultar.setVisible(false);
 							btnConsulta.setVisible(false);
 							lbCancelar.setVisible(true);
 							btnCancelar.setVisible(true);
+							c1.show(lmaCambio, idLaminaTarjeta);
 						}else {
+							c1.show(lmaCambio, idLaminaPresent);
 							showInfo.setText("TARJETA NO ENCONTRADA");
 							NumeroTarjeta.setEnabled(true);
 							ClaveTarjeta.setEnabled(true);
 						}
 					}
 				}
-			}else if(e.getSource()==btnConfirmacion) {
+			}else if(e.getSource()==btnUpdate) {
 				DBCliente dbCliente = conectInput ();
 				if(dbCliente!=null) {
 					ArrayList<Cliente> db = dbCliente.getCliente();
@@ -264,16 +298,17 @@ public class LMAEliminacion extends JPanel{
 						nDNI = NumeroCedula.getText();
 						if(validacion.AutentificacionCedula(nDNI, db)) {
 							cliente = validacion.getClienteDatos();
+							/*
 							if(db.remove(cliente)) {
 								conectOut(dbCliente);
-								lbConfirEliminar.setVisible(false);
-								btnConfirmacion.setVisible(false);
+								lbUpdate.setVisible(false);
+								btnUpdate.setVisible(false);
 								lbConsultar.setVisible(true);
 								btnConsulta.setVisible(true);
 								lbCancelar.setVisible(false);
 								btnCancelar.setVisible(false);
 								NumeroCedula.setEnabled(true);
-							}
+							}*/
 						}
 					}else if(opc==1) {
 						nC = NumeroCuenta.getText();
@@ -281,17 +316,17 @@ public class LMAEliminacion extends JPanel{
 							cuenta = validacion.getCuenta();
 							cliente = validacion.getClienteDatos();
 							ArrayList<Cuenta> arrayCuentas = cliente.getCuentaDatos();
-							if(arrayCuentas.remove(cuenta)) {
+							/*if(arrayCuentas.remove(cuenta)) {
 								cliente.updateCuentaDatos(arrayCuentas);
 								conectOut(dbCliente);
-								lbConfirEliminar.setVisible(false);
-								btnConfirmacion.setVisible(false);
+								lbUpdate.setVisible(false);
+								btnUpdate.setVisible(false);
 								lbConsultar.setVisible(true);
 								btnConsulta.setVisible(true);
 								lbCancelar.setVisible(false);
 								btnCancelar.setVisible(false);
 								NumeroCuenta.setEnabled(true);
-							}
+							}*/
 						}
 					}else if(opc==2) {
 						nT = NumeroTarjeta.getText();
@@ -301,11 +336,11 @@ public class LMAEliminacion extends JPanel{
 							cuenta = validacion.getCuenta();
 							cliente = validacion.getClienteDatos();
 							ArrayList<GenerarTarjeta> arrayTarjetas = cuenta.getTarjeta();
-							if(arrayTarjetas.remove(tarjeta)) {
+							/*if(arrayTarjetas.remove(tarjeta)) {
 								cuenta.updateTarjeta(arrayTarjetas);
 								conectOut(dbCliente);
-								lbConfirEliminar.setVisible(false);
-								btnConfirmacion.setVisible(false);
+								lbUpdate.setVisible(false);
+								btnUpdate.setVisible(false);
 								lbConsultar.setVisible(true);
 								btnConsulta.setVisible(true);
 								lbCancelar.setVisible(false);
@@ -313,21 +348,22 @@ public class LMAEliminacion extends JPanel{
 								NumeroTarjeta.setEnabled(true);
 								ClaveTarjeta.setEnabled(true);
 								
-							}
+							}*/
 						}
 					}
 					
 				}
 			}else if(e.getSource()==btnCancelar) {
 				clear();
+				c1.show(lmaCambio, idLaminaPresent);
 			}
 			
 		}
 		
 	}
 	public void clear() {
-		lbConfirEliminar.setVisible(false);
-		btnConfirmacion.setVisible(false);
+		lbUpdate.setVisible(false);
+		btnUpdate.setVisible(false);
 		lbConsultar.setVisible(true);
 		btnConsulta.setVisible(true);
 		lbCancelar.setVisible(false);
@@ -366,4 +402,5 @@ public class LMAEliminacion extends JPanel{
 			System.out.println("Error al guardar el archivo clientes.---" + i.getMessage());
 		}
 	}
+	
 }

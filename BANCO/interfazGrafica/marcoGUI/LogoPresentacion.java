@@ -16,7 +16,7 @@ public class LogoPresentacion extends JPanel{
 	 */
 	private static final long serialVersionUID = 1L;
 	private Color color;
-	public LogoPresentacion(String titulo) {
+	public LogoPresentacion(String titulo,int x,int y) {
 		color = new Color(7, 115, 157);
 		setBackground(color);
 		setLayout(new BoxLayout(LogoPresentacion.this,BoxLayout.Y_AXIS));
@@ -29,7 +29,7 @@ public class LogoPresentacion extends JPanel{
 		add(temText);
 		JPanel temIcon = new JPanel();
 		temIcon.setBackground(color);
-		temIcon.add(new JLabel(crearIcono("interfazGrafica/recursos/presentacion.png",150, 150)));
+		temIcon.add(new JLabel(crearIcono("interfazGrafica/recursos/presentacion.png",x, y)));
 		add(temIcon);
 	}
 	private ImageIcon crearIcono(String img, int width ,int height) {

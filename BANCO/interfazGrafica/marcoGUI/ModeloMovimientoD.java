@@ -98,7 +98,7 @@ public class ModeloMovimientoD extends JPanel{
 		cajaVertical.setLayout(new BoxLayout(cajaVertical,BoxLayout.Y_AXIS));
 		cantidad = new JSpinner();
 		cantidad.addMouseListener(new oyenteSpinne());
-		add(new LogoPresentacion(tituloP));
+		add(new LogoPresentacion(tituloP,150,150));
 		cajaVertical.add(addComponent ("MOVIMIENTO DE DINERO DEL CLIENTE", null));
 		cajaVertical.add(FormaMovimiento);
 		cajaVertical.add(lmaPrincipal1);

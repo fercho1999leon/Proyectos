@@ -55,7 +55,7 @@ public class LMASConsultas extends JPanel{
 			
 		});
 		
-		add(new LogoPresentacion("CONSULTAS DE INFORMACION"));
+		add(new LogoPresentacion("CONSULTAS DE INFORMACION",150,150));
 		add(FormaConsulta);
 		add(Box.createVerticalStrut(10));
 		add(ShowLamina);
