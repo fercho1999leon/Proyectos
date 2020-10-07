@@ -47,7 +47,7 @@ public class LMACcuenta extends JPanel{
 		Agregar("Saldo de cuenta:  ",txtSaldo);
 		add(cajaVertical);
 	}
-	protected <T> void Agregar (String n,T comp) {
+	public <T> void Agregar (String n,T comp) {
 		Box cajaHorizontal = Box.createHorizontalBox();
 		JPanel j1 = new JPanel();
 		JPanel j2 = new JPanel();

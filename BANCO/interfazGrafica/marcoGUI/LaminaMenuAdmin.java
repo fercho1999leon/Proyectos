@@ -20,6 +20,9 @@ public class LaminaMenuAdmin extends JPanel{
 	private JButton btnMin;
 	private JButton btnAtras;
 	private JButton btnServicio;
+	private JButton btnConsulta;
+	private JButton btnActualizacion;
+	private JButton btnEliminacion;
 	private LMACreacion LCreacion;
 	private LPanelCentral laminaCentral;
 	private LMASConsultas laminaConsulta;
@@ -39,6 +42,9 @@ public class LaminaMenuAdmin extends JPanel{
 		btnCrear = new JButton();
 		btnServicio = new JButton();
 		btnAtras = new JButton();
+		btnConsulta = new JButton();
+		btnActualizacion = new JButton();
+		btnEliminacion = new JButton();
 		this.marcoP=marcoP;
 		setLayout(new BorderLayout());
 		LCreacion = new LMACreacion(dbCliente);
@@ -153,6 +159,21 @@ public class LaminaMenuAdmin extends JPanel{
 			btnServicio.setContentAreaFilled(false);
 			btnServicio.setFocusable(false);
 			
+			btnConsulta.setIcon(crearIcono("interfazGrafica/recursos/servicioCliente.png",50,50));
+			btnConsulta.setBorderPainted(false);
+			btnConsulta.setContentAreaFilled(false);
+			btnConsulta.setFocusable(false);
+			
+			btnActualizacion.setIcon(crearIcono("interfazGrafica/recursos/servicioCliente.png",50,50));
+			btnActualizacion.setBorderPainted(false);
+			btnActualizacion.setContentAreaFilled(false);
+			btnActualizacion.setFocusable(false);
+			
+			btnEliminacion.setIcon(crearIcono("interfazGrafica/recursos/servicioCliente.png",50,50));
+			btnEliminacion.setBorderPainted(false);
+			btnEliminacion.setContentAreaFilled(false);
+			btnEliminacion.setFocusable(false);
+			
 			btnCrear.setIcon(crearIcono("interfazGrafica/recursos/addUser.png",50,50));
 			btnCrear.setBorderPainted(false);
 			btnCrear.setContentAreaFilled(false);
@@ -176,6 +197,10 @@ public class LaminaMenuAdmin extends JPanel{
 			
 			btnCrear.addMouseListener(new oyentePanelI());
 			btnServicio.addMouseListener(new oyentePanelI());
+			btnConsulta.addMouseListener(new oyentePanelI());
+			btnActualizacion.addMouseListener(new oyentePanelI());
+			btnEliminacion.addMouseListener(new oyentePanelI());
+			
 			btnCrear.addActionListener(new ActionListener() {
 
 				@Override
@@ -191,11 +216,12 @@ public class LaminaMenuAdmin extends JPanel{
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					CardLayout c1 = (CardLayout)laminaCentral.getLayout();
-					c1.show(laminaCentral,v3);
+					c1.show(laminaCentral,v5);
 					//LCreacion.clearData();
 				}
 				
 			});
+			
 			
 			
 			//Agrega componentes del panel izquierdo 

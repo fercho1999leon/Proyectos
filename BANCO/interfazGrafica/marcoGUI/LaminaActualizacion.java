@@ -31,7 +31,7 @@ public class LaminaActualizacion extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JPanel cajaVertical,cajaHorizontal,lmaCambio;
 	private Color color;
-	private JTextField NumeroTarjeta,ClaveTarjeta,NumeroCuenta,NumeroCedula;
+	private JTextField NumeroTarjeta,ClaveTarjeta,NumeroCuenta,NumeroCedula,UpdateClave;
 	private JPanel lmaPrincipal,lmaTarjeta,lmaCuenta, lmaCliente, lmaBTN;
 	private JComboBox<String> tipoActualizacion;
 	private JTextArea showInfo;
@@ -42,6 +42,7 @@ public class LaminaActualizacion extends JPanel {
 	private LMACcliente laminaCliente;
 	private LMACcuenta laminaCuenta;
 	private LMACtarjeta laminaTarjeta;
+	
 	final static String idTarjeta = "Tarjeta";
 	final static String idCliente = "Cliente";
 	final static String idCuenta = "Cuenta";
@@ -50,9 +51,11 @@ public class LaminaActualizacion extends JPanel {
 	final static String idLaminaCuenta = "LaminaCuenta";
 	final static String idLaminaPresent = "LaminaPresent";
 	public LaminaActualizacion() {
+		UpdateClave = new JTextField(anchoTxt);
 		laminaCliente = new LMACcliente();
 		laminaCuenta = new LMACcuenta();
 		laminaTarjeta = new LMACtarjeta();
+		laminaTarjeta.Agregar("Clave de tarjeta ", UpdateClave);
 		color = new Color(0, 39, 56);
 		setBackground(color);
 		setLayout(new BoxLayout(LaminaActualizacion.this,BoxLayout.X_AXIS));
@@ -213,9 +216,6 @@ public class LaminaActualizacion extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			String nC = null, nDNI = null, nT = null, nClave = null;
 			CardLayout c1 = (CardLayout)lmaCambio.getLayout();
-			Cliente cliente = new Cliente();
-			Cuenta cuenta = new Cuenta();
-			GenerarTarjeta tarjeta;
 			int opc = tipoActualizacion.getSelectedIndex();
 			Autentificacion validacion = new Autentificacion();
 			if(e.getSource()==btnConsulta) {
@@ -229,7 +229,6 @@ public class LaminaActualizacion extends JPanel {
 							Infcliente consulta = new Infcliente();
 							showInfo.setText("");
 							consulta.MostraDatos(nDNI, db, showInfo);
-							cliente = validacion.getClienteDatos();
 							lbUpdate.setVisible(true);
 							btnUpdate.setVisible(true);
 							lbConsultar.setVisible(false);
@@ -249,8 +248,6 @@ public class LaminaActualizacion extends JPanel {
 							Infcuenta consulta = new Infcuenta();
 							showInfo.setText("");
 							consulta.MostraDatos(nC, db, showInfo);
-							cuenta = validacion.getCuenta();
-							cliente = validacion.getClienteDatos();
 							lbUpdate.setVisible(true);
 							btnUpdate.setVisible(true);
 							lbConsultar.setVisible(false);
@@ -271,10 +268,7 @@ public class LaminaActualizacion extends JPanel {
 						if(validacion.AutentificacionTarjeta(nT, nClave, db)) {
 							Infcuenta consulta = new Infcuenta();
 							showInfo.setText("");
-							consulta.MostraDatos(nDNI, db, showInfo);
-							tarjeta = validacion.getTarjeta();
-							cuenta = validacion.getCuenta();
-							cliente = validacion.getClienteDatos();
+							consulta.MostraDatos(validacion.getCuenta().getNumeroCuenta(), db, showInfo);
 							lbUpdate.setVisible(true);
 							btnUpdate.setVisible(true);
 							lbConsultar.setVisible(false);
@@ -297,58 +291,103 @@ public class LaminaActualizacion extends JPanel {
 					if(opc==0) {
 						nDNI = NumeroCedula.getText();
 						if(validacion.AutentificacionCedula(nDNI, db)) {
-							cliente = validacion.getClienteDatos();
-							/*
-							if(db.remove(cliente)) {
-								conectOut(dbCliente);
-								lbUpdate.setVisible(false);
-								btnUpdate.setVisible(false);
-								lbConsultar.setVisible(true);
-								btnConsulta.setVisible(true);
-								lbCancelar.setVisible(false);
-								btnCancelar.setVisible(false);
-								NumeroCedula.setEnabled(true);
-							}*/
+							if(!laminaCliente.getTxtNombre().getText().equals("")) {
+								validacion.getClienteDatos().setNombre(laminaCliente.getTxtNombre().getText());
+							}
+							if(!laminaCliente.getTxtDNI().getText().equals("")) {
+								validacion.getClienteDatos().setDNI(laminaCliente.getTxtDNI().getText());
+							}
+							if(!laminaCliente.getTxtDireccion().getText().equals("")) {
+								validacion.getClienteDatos().setDireccion(laminaCliente.getTxtDireccion().getText());
+							}
+							if(!laminaCliente.getTxtTelefono().getText().equals("")) {
+								validacion.getClienteDatos().setTelefono(laminaCliente.getTxtTelefono().getText());
+							}
+							conectOut(dbCliente);
+							Infcliente consulta = new Infcliente();
+							showInfo.setText("");
+							showInfo.append("\nActualizacion exitosa\n");
+							consulta.MostraDatos(nDNI, db, showInfo);
+							lbUpdate.setVisible(false);
+							btnUpdate.setVisible(false);
+							lbCancelar.setText("LIMPIAR");
+							lbCancelar.setVisible(true);
+							btnCancelar.setVisible(true);
+						}else {
+							NumeroCedula.setEnabled(true);
+							c1.show(lmaCambio, idLaminaPresent);
+							showInfo.setText("CLIENTE NO ENCONTRADO");
 						}
 					}else if(opc==1) {
 						nC = NumeroCuenta.getText();
 						if(validacion.AutentificacionCuenta(nC, db, true)) {
-							cuenta = validacion.getCuenta();
-							cliente = validacion.getClienteDatos();
-							ArrayList<Cuenta> arrayCuentas = cliente.getCuentaDatos();
-							/*if(arrayCuentas.remove(cuenta)) {
-								cliente.updateCuentaDatos(arrayCuentas);
-								conectOut(dbCliente);
-								lbUpdate.setVisible(false);
-								btnUpdate.setVisible(false);
-								lbConsultar.setVisible(true);
-								btnConsulta.setVisible(true);
-								lbCancelar.setVisible(false);
-								btnCancelar.setVisible(false);
-								NumeroCuenta.setEnabled(true);
-							}*/
+							if(!laminaCuenta.getTxtNumerCuenta().getText().equals("")) {
+								validacion.getCuenta().setNumeroCuenta(laminaCuenta.getTxtNumerCuenta().getText());
+							}
+							if(!laminaCuenta.getTxtSaldo().getText().equals("")) {
+								validacion.getCuenta().setSaldo(Double.parseDouble(laminaCuenta.getTxtSaldo().getText()));
+							}
+							if(laminaCuenta.geteActivo().isSelected()) {
+								validacion.getCuenta().setEstado("ACTIVO  ");
+							}else {
+								validacion.getCuenta().setEstado("INACTIVO");
+							}
+							if(laminaCuenta.gettAhorro().isSelected()) {
+								validacion.getCuenta().setTipoCuenta("AHORRO   ");
+							}else{
+								validacion.getCuenta().setTipoCuenta("CORRIENTE");
+							}
+							conectOut(dbCliente);
+							Infcuenta consulta = new Infcuenta();
+							showInfo.setText("");
+							showInfo.append("\nActualizacion exitosa\n");
+							consulta.MostraDatos(nC, db, showInfo);
+							lbUpdate.setVisible(false);
+							btnUpdate.setVisible(false);
+							lbCancelar.setText("LIMPIAR");
+							lbCancelar.setVisible(true);
+							btnCancelar.setVisible(true);
+						}else {
+							NumeroCuenta.setEnabled(true);
+							c1.show(lmaCambio, idLaminaPresent);
+							showInfo.setText("CUENTA NO ENCONTRADO");
 						}
 					}else if(opc==2) {
 						nT = NumeroTarjeta.getText();
 						nClave = ClaveTarjeta.getText();
 						if(validacion.AutentificacionTarjeta(nT, nClave, db)) {
-							tarjeta = validacion.getTarjeta();
-							cuenta = validacion.getCuenta();
-							cliente = validacion.getClienteDatos();
-							ArrayList<GenerarTarjeta> arrayTarjetas = cuenta.getTarjeta();
-							/*if(arrayTarjetas.remove(tarjeta)) {
-								cuenta.updateTarjeta(arrayTarjetas);
-								conectOut(dbCliente);
-								lbUpdate.setVisible(false);
-								btnUpdate.setVisible(false);
-								lbConsultar.setVisible(true);
-								btnConsulta.setVisible(true);
-								lbCancelar.setVisible(false);
-								btnCancelar.setVisible(false);
-								NumeroTarjeta.setEnabled(true);
-								ClaveTarjeta.setEnabled(true);
-								
-							}*/
+							if(!laminaTarjeta.getTxtNunTarjeta().getText().equals("")) {
+								validacion.getTarjeta().setNumeroTarjeta(laminaTarjeta.getTxtNunTarjeta().getText());
+							}
+							if(!laminaTarjeta.getTxtFechaCad().getText().equals("")) {
+								validacion.getTarjeta().setFechaCaducidad(laminaTarjeta.getTxtFechaCad().getText());
+							}
+							if(!laminaTarjeta.getTxtNunSerie().getText().equals("")) {
+								validacion.getTarjeta().setSerie(laminaTarjeta.getTxtNunSerie().getText());
+							}
+							if(laminaTarjeta.getRdbDesblo().isSelected()) {
+								validacion.getTarjeta().setEstado("DESBLOQUEADO");
+							}else {
+								validacion.getTarjeta().setEstado("BLOQUEADA   ");
+							}
+							if(!UpdateClave.getText().equals("")) {
+								validacion.getTarjeta().setClaveTarjeta(UpdateClave.getText());
+							}
+							conectOut(dbCliente);
+							Infcuenta consulta = new Infcuenta();
+							showInfo.setText("");
+							showInfo.append("\nActualizacion exitosa\n");
+							consulta.MostraDatos(validacion.getCuenta().getNumeroCuenta(), db, showInfo);
+							lbUpdate.setVisible(false);
+							btnUpdate.setVisible(false);
+							lbCancelar.setText("LIMPIAR");
+							lbCancelar.setVisible(true);
+							btnCancelar.setVisible(true);
+						}else {
+							c1.show(lmaCambio, idLaminaPresent);
+							showInfo.setText("TARJETA NO ENCONTRADA");
+							NumeroTarjeta.setEnabled(true);
+							ClaveTarjeta.setEnabled(true);
 						}
 					}
 					
@@ -367,6 +406,7 @@ public class LaminaActualizacion extends JPanel {
 		lbConsultar.setVisible(true);
 		btnConsulta.setVisible(true);
 		lbCancelar.setVisible(false);
+		lbCancelar.setText("PRESIONE PARA CANCELAR");
 		btnCancelar.setVisible(false);
 		NumeroTarjeta.setEnabled(true);
 		ClaveTarjeta.setEnabled(true);
