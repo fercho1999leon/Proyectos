@@ -145,31 +145,44 @@ public class LaminaMenuAdmin extends JPanel{
 		private Box cajaVertical;
 		private JLabel jlCreacion;
 		private JLabel jlServicio;
+		private JLabel jlConsulta;
+		private JLabel jlActualizacion;
+		private JLabel jlEliminacion;
 		public LPanelIzquierdo() {
 			setOpaque(true);
 			jlCreacion = new JLabel();
 			jlServicio = new JLabel();
+			jlConsulta = new JLabel();
+			jlActualizacion = new JLabel();
+			jlEliminacion = new JLabel();
+			
 			jlCreacion.setFont(new Font("Arial",Font.BOLD,15));
 			jlCreacion.setForeground(Color.WHITE);
 			jlServicio.setFont(new Font("Arial",Font.BOLD,15));
 			jlServicio.setForeground(Color.WHITE);
+			jlConsulta.setFont(new Font("Arial",Font.BOLD,15));
+			jlConsulta.setForeground(Color.WHITE);
+			jlActualizacion.setFont(new Font("Arial",Font.BOLD,15));
+			jlActualizacion.setForeground(Color.WHITE);
+			jlEliminacion.setFont(new Font("Arial",Font.BOLD,15));
+			jlEliminacion.setForeground(Color.WHITE);
 			
 			btnServicio.setIcon(crearIcono("interfazGrafica/recursos/servicioCliente.png",50,50));
 			btnServicio.setBorderPainted(false);
 			btnServicio.setContentAreaFilled(false);
 			btnServicio.setFocusable(false);
 			
-			btnConsulta.setIcon(crearIcono("interfazGrafica/recursos/servicioCliente.png",50,50));
+			btnConsulta.setIcon(crearIcono("interfazGrafica/recursos/consulta.png",50,50));
 			btnConsulta.setBorderPainted(false);
 			btnConsulta.setContentAreaFilled(false);
 			btnConsulta.setFocusable(false);
 			
-			btnActualizacion.setIcon(crearIcono("interfazGrafica/recursos/servicioCliente.png",50,50));
+			btnActualizacion.setIcon(crearIcono("interfazGrafica/recursos/actualizacion.png",50,50));
 			btnActualizacion.setBorderPainted(false);
 			btnActualizacion.setContentAreaFilled(false);
 			btnActualizacion.setFocusable(false);
 			
-			btnEliminacion.setIcon(crearIcono("interfazGrafica/recursos/servicioCliente.png",50,50));
+			btnEliminacion.setIcon(crearIcono("interfazGrafica/recursos/eliminar.png",50,50));
 			btnEliminacion.setBorderPainted(false);
 			btnEliminacion.setContentAreaFilled(false);
 			btnEliminacion.setFocusable(false);
@@ -211,12 +224,32 @@ public class LaminaMenuAdmin extends JPanel{
 				}
 				
 			});
-			btnServicio.addActionListener(new ActionListener() {
+			btnConsulta.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					CardLayout c1 = (CardLayout)laminaCentral.getLayout();
+					c1.show(laminaCentral,v3);
+					//LCreacion.clearData();
+				}
+				
+			});
+			btnActualizacion.addActionListener(new ActionListener() {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					CardLayout c1 = (CardLayout)laminaCentral.getLayout();
 					c1.show(laminaCentral,v5);
+					//LCreacion.clearData();
+				}
+				
+			});
+			btnEliminacion.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					CardLayout c1 = (CardLayout)laminaCentral.getLayout();
+					c1.show(laminaCentral,v4);
 					//LCreacion.clearData();
 				}
 				
@@ -244,6 +277,31 @@ public class LaminaMenuAdmin extends JPanel{
 			comp.add(jlServicio);
 			cajaVertical.add(comp);
 			
+			comp = new JPanel();
+			comp.setBackground(new Color(34,79,98));
+			comp.setLayout(new FlowLayout(FlowLayout.LEFT));
+			comp.add(Box.createHorizontalStrut(40));
+			comp.add(btnConsulta);
+			comp.add(jlConsulta);
+			cajaVertical.add(comp);
+			
+			comp = new JPanel();
+			comp.setBackground(new Color(34,79,98));
+			comp.setLayout(new FlowLayout(FlowLayout.LEFT));
+			comp.add(Box.createHorizontalStrut(40));
+			comp.add(btnActualizacion);
+			comp.add(jlActualizacion);
+			cajaVertical.add(comp);
+			
+			comp = new JPanel();
+			comp.setBackground(new Color(34,79,98));
+			comp.setLayout(new FlowLayout(FlowLayout.LEFT));
+			comp.add(Box.createHorizontalStrut(40));
+			comp.add(btnEliminacion);
+			comp.add(jlEliminacion);
+			cajaVertical.add(comp);
+			
+			
 			addMouseListener(new oyentePanelI());
 			setBackground(new Color(34,79,98));
 			add(cajaVertical);
@@ -255,12 +313,18 @@ public class LaminaMenuAdmin extends JPanel{
 				btnServicio.setFocusable(true);
 				jlCreacion.setText("CREACION DE NUEVO USUARIO");
 				jlServicio.setText("SERVICIO AL CLIENTE");
+				jlConsulta.setText("CONSULTAS DE DATOS");
+				jlActualizacion.setText("ACTUALIZACION DE DATOS");
+				jlEliminacion.setText("ELIMINACION DE DATOS");
 			}
 			public void mouseExited(MouseEvent e) {
 				btnCrear.setFocusable(false);
 				btnServicio.setFocusable(false);
 				jlCreacion.setText("");
 				jlServicio.setText("");
+				jlConsulta.setText("");
+				jlActualizacion.setText("");
+				jlEliminacion.setText("");
 			}
 		}
 	}
