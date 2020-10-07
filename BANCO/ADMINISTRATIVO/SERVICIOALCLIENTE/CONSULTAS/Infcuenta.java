@@ -27,19 +27,19 @@ public class Infcuenta extends Autentificacion{
 		System.out.println("---------------------------------------------------------------------------------------------------------");
 		*/
 		
-		print.append("\n***************************************************************************************************************");
+		print.append("\n**********************************************************************************************************************************");
 		print.append("\n1. Numero de cuenta: "+cuenta.getNumeroCuenta());
 		print.append("\n   Saldo total de la cuenta: "+cuenta.getSaldo());
 		print.append("\n2. Estado de la cuenta (ACTIVA/INACTIVA): "+cuenta.getEstado());
 		print.append("\n3. Tipo de cuenta(AHORROS/CORRIENTE): "+cuenta.getTipoCuenta());
 		print.append("\nTarjeta que pertenece a esta cuenta.");
-		print.append("\n-------------------------------------------------------------------------------------------------------------------------------------------");
+		print.append("\n-------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 		print.append("\n || Numero de tarjeta  |  Clave de seguridad  |  Serie  |  Fecha de caducidad  |  ESTADO DE TARJETA   || ");
 		for (GenerarTarjeta t : dbTarjetas) {
 			print.append("\n || "+Cont+"."+t.getNumeroTarjeta()+"        |               "+t.getClaveTarjeta()+"                |   "+t.getSerie()+"   |              "+t.getFechaCaducidad()+"            |      "+t.getEstado()+"      ||");
 			Cont++;
 		}
-		print.append("\n-------------------------------------------------------------------------------------------------------------------------------------------");
+		print.append("\n-------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 	}
 	public boolean MostraDatos(String NumeroCuenta,ArrayList<Cliente> ClienteStatus, JTextArea print){ //Solo se consulta por cedula del cliente
 		if(AutentificacionCuenta(NumeroCuenta,ClienteStatus,true)){
