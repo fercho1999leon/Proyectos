@@ -5,10 +5,14 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+import java.util.ArrayList;
 import javax.swing.*;
-
+import ADMINISTRATIVO.CREACION.Cliente;
 import ADMINISTRATIVO.SERVICIOALCLIENTE.CONSULTAS.Infcliente;
+import ADMINISTRATIVO.SERVICIOALCLIENTE.CONSULTAS.Infcuenta;
+import BASEDEDATOS.DBCliente;
 
 public class LMASConsultas extends JPanel{
 	/**
@@ -27,7 +31,7 @@ public class LMASConsultas extends JPanel{
 		setBackground(color);
 		setLayout(new BoxLayout(LMASConsultas.this,BoxLayout.Y_AXIS));
 		lmaCliente = new LMAModeloConsulta(new oyenteConsultaCliente(),"INGRESE EL NUMERO DE CEDULA ");
-		lmaCuenta = new LMAModeloConsulta(null,"INGRESE EL NUMERO DE CUENTA");
+		lmaCuenta = new LMAModeloConsulta(new oyenteConsultaCuenta(),"INGRESE EL NUMERO DE CUENTA");
 		ShowLamina = new JPanel();
 		ShowLamina.setBounds(5, 300, 400, 100);
 		ShowLamina.setLayout(new CardLayout(0,0));
@@ -84,19 +88,59 @@ public class LMASConsultas extends JPanel{
 	}
 	private class oyenteConsultaCliente implements ActionListener{
 		private Infcliente consulta;
-		public oyenteConsultaCliente() {
-			consulta = new Infcliente();
-		}
+		private String nDNI;
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
+			consulta = new Infcliente();
+			nDNI = lmaCliente.getTxtDatos().getText();
+			DBCliente dbCliente = conectInput ();
+			if(dbCliente!=null) {
+				ArrayList<Cliente> db = dbCliente.getCliente();
+				lmaCliente.getTxtMostrar().setText("");
+				if(consulta.MostraDatos(nDNI, db, lmaCliente.getTxtMostrar())) {
+					System.out.println("Consulta exitosa");
+				}
+			}
 			
 		}
 		
 	}
+	private class oyenteConsultaCuenta implements ActionListener{
+		private Infcuenta consulta;
+		private String nC1;
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			consulta = new Infcuenta();
+			nC1 = lmaCuenta.getTxtDatos().getText();
+			DBCliente dbCliente = conectInput ();
+			if(dbCliente!=null) {
+				ArrayList<Cliente> db = dbCliente.getCliente();
+				lmaCuenta.getTxtMostrar().setText("");
+				if(consulta.MostraDatos(nC1, db, lmaCuenta.getTxtMostrar())) {
+					System.out.println("Consulta exitosa");
+				}
+			}
+			
+		}
+		
+	}
+	
 	private ImageIcon crearIcono(String img, int width ,int height) {
 		ImageIcon icon = new ImageIcon(img);
 		ImageIcon icono = new ImageIcon(icon.getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT));
 		return icono;
+	}
+	private DBCliente conectInput () {
+		DBCliente dbCliente = null;
+		String direcciondbClientes = "archivosStream/dbClientes.dat";
+		try {
+			ObjectInputStream InStreamdbClientes = new ObjectInputStream(new FileInputStream(direcciondbClientes));
+			dbCliente = (DBCliente)InStreamdbClientes.readObject();
+			InStreamdbClientes.close();
+			System.out.println("Archivo cliente encontrado");
+		}catch(Exception ex) {
+			System.out.println("Archivo no encontrado");
+		}
+		return dbCliente;
 	}
 }
