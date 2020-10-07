@@ -42,6 +42,10 @@ public class Cuenta implements Serializable{
         }
 		Tarjeta.add(tarjeta);
 	}
+	
+	public void updateTarjeta (ArrayList<GenerarTarjeta> Tarjeta) {
+		this.Tarjeta=Tarjeta;
+	}
 
     public String getNumeroCuenta() {
         return NumeroCuenta;

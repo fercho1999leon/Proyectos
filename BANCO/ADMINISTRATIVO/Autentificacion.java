@@ -4,9 +4,10 @@ import java.util.*;
 public class Autentificacion{
 	protected int Control;
 	protected String DNI,NumeroCuenta,NumeroTarjeta,ClaveTarjeta;
-	protected Cliente ClienteDatos = new Cliente();
+	protected Cliente ClienteDatos;
 	protected Cuenta cuenta;
 	protected GenerarTarjeta tarjeta;
+	
 	public Autentificacion(){
 		cuenta = new Cuenta();
 		tarjeta = new GenerarTarjeta();
@@ -15,9 +16,35 @@ public class Autentificacion{
 		NumeroTarjeta="0";
 		ClaveTarjeta="0";
 		Control = 0;
+		ClienteDatos = new Cliente();
 	}
 	
 	
+	
+	public GenerarTarjeta getTarjeta() {
+		return tarjeta;
+	}
+
+
+
+	public void setTarjeta(GenerarTarjeta tarjeta) {
+		this.tarjeta = tarjeta;
+	}
+
+
+
+	public Cuenta getCuenta() {
+		return cuenta;
+	}
+
+
+
+	public void setCuenta(Cuenta cuenta) {
+		this.cuenta = cuenta;
+	}
+
+
+
 	public Cliente getClienteDatos() {
 		return ClienteDatos;
 	}
@@ -112,4 +139,5 @@ public class Autentificacion{
 		}
 		return false;
 	}
+	
 }

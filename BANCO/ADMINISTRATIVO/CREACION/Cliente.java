@@ -77,6 +77,10 @@ public class Cliente implements Serializable{
         }
         CuentaDatos.add(cuenta);
     }
+	public void updateCuentaDatos(ArrayList<Cuenta> CuentaDatos) {
+        this.CuentaDatos = CuentaDatos;
+    }
+	
 
     @Override
     public String toString() {

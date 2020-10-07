@@ -25,13 +25,15 @@ public class LMAModeloConsulta extends JPanel{
 		cajaVertical.setBackground(color);
 		cajaHorizontal = new JPanel();
 		cajaHorizontal.setLayout(new BoxLayout(cajaHorizontal,BoxLayout.X_AXIS));
-		txtMostrar = new JTextArea(12,20);
+		
+		txtMostrar = new JTextArea(20,20);
 		txtMostrar.setEnabled(false);
-		txtMostrar.setBackground(color);
-		txtMostrar.setForeground(new Color(255, 255, 255));
-		txtMostrar.setFont(new Font("Andale Mono", 1, 13));
+		//txtMostrar.setBackground(color);
+		//txtMostrar.setForeground(new Color(255, 255, 255));
+		//txtMostrar.setFont(new Font("Andale Mono", 1, 13));
 		scrollMostrar = new JScrollPane(txtMostrar);
 		txtDatos = new JTextField(anchoTxt);
+		
 		JLabel lb = new JLabel(tituloLb);
 		lb.setForeground(new Color(255, 255, 255));
 		lb.setFont(new Font("Andale Mono", 1, 13));
