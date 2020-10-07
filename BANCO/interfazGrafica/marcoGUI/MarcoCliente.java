@@ -25,7 +25,8 @@ public class MarcoCliente extends JFrame{
 		Toolkit miPantalla = Toolkit.getDefaultToolkit();
 		int height = (int)miPantalla.getScreenSize().getHeight();
 		int width = (int)miPantalla.getScreenSize().getWidth();
-		setSize((int)(width/1.4),(int)(height/1.45));
+		System.out.println("x: "+(int)(width/1.4) +" y: "+(int)(height/1.45));
+		setSize(971,529);
 		setLocationRelativeTo(null);
 		add(new LaminaMenuCliente(MarcoCliente.this));
 		//PONE LA VENTANA CON BORDES REDONDEADOS

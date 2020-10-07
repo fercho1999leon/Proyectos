@@ -24,8 +24,8 @@ public class MarcoMenuAdmin extends JFrame{
 		Toolkit miPantalla = Toolkit.getDefaultToolkit();
 		int height = (int)miPantalla.getScreenSize().getHeight();
 		int width = (int)miPantalla.getScreenSize().getWidth();
-		setSize((int)(width/1.2),(int)(height/1.3));
-		//System.out.println("x: "+(int)(width/1.2) +"y:"+(int)(height/1.2));
+		System.out.println("x: "+(int)(width/1.2) +" y: "+(int)(height/1.2));
+		setSize(1133,640);
 		setLocationRelativeTo(null);
 		add(new LaminaMenuAdmin(MarcoMenuAdmin.this,dbCliente));
 	}
