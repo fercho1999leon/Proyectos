@@ -18,9 +18,11 @@ public class LMACtarjeta extends JPanel{
 	private JTextField txtNunSerie;
 	private ButtonGroup btngEstado;
 	protected Box cajaVertical;
+	private Color color;
 	public LMACtarjeta () {
+		color = new Color(0, 39, 56);
 		setOpaque(true);
-		setBackground(new Color(7,115,157));
+		setBackground(color);
 		txtNunTarjeta = new JTextField(Width);
 		rdbDesblo = new JRadioButton("DESBLOQUEADO");
 		rdbBlo = new JRadioButton("BLOQUEADO");
@@ -48,8 +50,8 @@ public class LMACtarjeta extends JPanel{
 		JLabel titulo = new JLabel(n);
 		titulo.setFont(new Font("Arial",Font.BOLD,15));
 		titulo.setForeground(Color.WHITE);
-		j1.setBackground(new Color(7,115,157));
-		j2.setBackground(new Color(7,115,157));
+		j1.setBackground(color);
+		j2.setBackground(color);
 		j1.setLayout(new FlowLayout(FlowLayout.LEFT));
 		j2.setLayout(new FlowLayout(FlowLayout.LEFT));
 		j1.add(titulo);
@@ -61,9 +63,9 @@ public class LMACtarjeta extends JPanel{
 	private <T> void agregarR(T comp,int tamano) {
 		((JComponent) comp).setFont(new Font("Arial",Font.BOLD,tamano));
 		((JComponent) comp).setForeground(Color.WHITE);
-		((JComponent) comp).setBackground(new Color(7,115,157));
+		((JComponent) comp).setBackground(color);
 		JPanel p1 = new JPanel();
-		p1.setBackground(new Color(7,115,157));
+		p1.setBackground(color);
 		p1.setLayout(new FlowLayout(FlowLayout.LEFT));
 		p1.add(((JComponent) comp));
 		cajaVertical.add(p1);

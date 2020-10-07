@@ -25,15 +25,14 @@ public class LMASConsultas extends JPanel{
 	private Color color;
 	private JComboBox<String> FormaConsulta;
 	public LMASConsultas() {
-		color = new Color(7, 115, 157);
+		color = new Color(0, 39, 56);
 		setBackground(color);
 		setLayout(new BoxLayout(LMASConsultas.this,BoxLayout.Y_AXIS));
 		lmaCliente = new LMAModeloConsulta(new oyenteConsultaCliente(),"INGRESE EL NUMERO DE CEDULA ");
 		lmaCuenta = new LMAModeloConsulta(new oyenteConsultaCuenta(),"INGRESE EL NUMERO DE CUENTA");
 		ShowLamina = new JPanel();
-		ShowLamina.setBounds(5, 300, 400, 100);
 		ShowLamina.setLayout(new CardLayout(0,0));
-		ShowLamina.setBackground(new Color(0, 39, 56));
+		ShowLamina.setBackground(color);
 		ShowLamina.add(lmaCliente,idLMACliente);
 		ShowLamina.add(lmaCuenta,idLMACuenta);
 		

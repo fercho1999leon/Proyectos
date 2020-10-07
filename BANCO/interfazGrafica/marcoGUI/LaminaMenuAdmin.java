@@ -191,7 +191,7 @@ public class LaminaMenuAdmin extends JPanel{
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					CardLayout c1 = (CardLayout)laminaCentral.getLayout();
-					c1.show(laminaCentral,v5);
+					c1.show(laminaCentral,v3);
 					//LCreacion.clearData();
 				}
 				
@@ -246,7 +246,7 @@ public class LaminaMenuAdmin extends JPanel{
 
 		public LPanelCentral() {
 			setOpaque(true);
-			setBackground(new Color(7,115,157));
+			setBackground(new Color(0, 39, 56));
 			setLayout(new CardLayout(0,0));
 			add(new LMAPresentacion("interfazGrafica/recursos/presentacion.png",7, 115, 157),v2);
 			add(LCreacion,v1);

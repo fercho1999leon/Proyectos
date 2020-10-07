@@ -12,9 +12,11 @@ public class LMACcliente extends JPanel{
 	private JTextArea txtDireccion;
 	private JTextField txtTelefono;
 	protected Box cajaVertical;
+	private Color color;
 	public LMACcliente() {
+		color = new Color(0, 39, 56);
 		setOpaque(true);
-		setBackground(new Color(7,115,157));
+		setBackground(color);
 		cajaVertical = Box.createVerticalBox();
 		setBorder(BorderFactory.createTitledBorder("Datos cliente"));
 		txtNombre = new JTextField(tamanoTextF);
@@ -37,8 +39,8 @@ public class LMACcliente extends JPanel{
 		JLabel titulo = new JLabel(n);
 		titulo.setFont(new Font("Arial",Font.BOLD,15));
 		titulo.setForeground(Color.WHITE);
-		j1.setBackground(new Color(7,115,157));
-		j2.setBackground(new Color(7,115,157));
+		j1.setBackground(color);
+		j2.setBackground(color);
 		j1.setLayout(new FlowLayout(FlowLayout.LEFT));
 		j2.setLayout(new FlowLayout(FlowLayout.LEFT));
 		j1.add(titulo);

@@ -17,7 +17,7 @@ public class LMAModeloConsulta extends JPanel{
 	private Color color;
 	private static int anchoTxt = 12;
 	public LMAModeloConsulta(ActionListener oyente ,String tituloLb) {
-		color = new Color(7, 115, 157);
+		color = new Color(0, 39, 56);
 		setBackground(color);
 		setLayout(new BoxLayout(LMAModeloConsulta.this,BoxLayout.X_AXIS));
 		cajaVertical = new JPanel();

@@ -26,15 +26,17 @@ public class LMACreacion extends JPanel{
 	private LMACtarjeta LTarjeta;
 	private JButton btnGuardar;
 	DBCliente dbCliente;
+	private Color color;
 	
 	public LMACreacion(DBCliente dbCliente) {
+		color = new Color(0, 39, 56);
 		this.dbCliente = dbCliente;
 		cajaHorizontal = new JPanel();
-		cajaHorizontal.setBackground(new Color(7,115,157));
+		cajaHorizontal.setBackground(color);
 		cajaVertical = new JPanel();
-		cajaVertical.setBackground(new Color(7,115,157));
+		cajaVertical.setBackground(color);
 		setOpaque(true);
-		setBackground(new Color(7,115,157));
+		setBackground(color);
 		LCliente = new LMACcliente();
 		LCuenta = new LMACcuenta();
 		LTarjeta  = new LMACtarjeta();
@@ -53,10 +55,11 @@ public class LMACreacion extends JPanel{
 		cajaHorizontal.add(Box.createHorizontalGlue());
 		cajaHorizontal.add(LTarjeta);
 		JLabel titulo = new JLabel("BANCO UG",(crearIcono("interfazGrafica/recursos/presentacion.png",150,150)),JLabel.RIGHT);
-		titulo.setFont(new Font("Arial",Font.BOLD,25));
+		titulo.setForeground(new Color(255, 255, 255));
+		titulo.setFont(new Font("Andale Mono",Font.BOLD, 25));
 		JPanel contTitulo = new JPanel();
 		contTitulo.setOpaque(true);
-		contTitulo.setBackground(new Color(7,115,157));
+		contTitulo.setBackground(color);
 		contTitulo.add(titulo);
 		cajaVertical.add(contTitulo);
 		cajaVertical.add(Box.createGlue());

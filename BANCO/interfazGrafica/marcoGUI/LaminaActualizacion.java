@@ -53,7 +53,7 @@ public class LaminaActualizacion extends JPanel {
 		laminaCliente = new LMACcliente();
 		laminaCuenta = new LMACcuenta();
 		laminaTarjeta = new LMACtarjeta();
-		color = new Color(7, 115, 157);
+		color = new Color(0, 39, 56);
 		setBackground(color);
 		setLayout(new BoxLayout(LaminaActualizacion.this,BoxLayout.X_AXIS));
 		cajaVertical = new JPanel();

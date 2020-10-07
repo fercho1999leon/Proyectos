@@ -17,7 +17,7 @@ public class LogoPresentacion extends JPanel{
 	private static final long serialVersionUID = 1L;
 	private Color color;
 	public LogoPresentacion(String titulo,int x,int y) {
-		color = new Color(7, 115, 157);
+		color = new Color(0, 39, 56);
 		setBackground(color);
 		setLayout(new BoxLayout(LogoPresentacion.this,BoxLayout.Y_AXIS));
 		JPanel temText = new JPanel();

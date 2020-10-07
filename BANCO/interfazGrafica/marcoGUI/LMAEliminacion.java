@@ -41,7 +41,7 @@ public class LMAEliminacion extends JPanel{
 	final static String idCliente = "Cliente";
 	final static String idCuenta = "Cuenta";
 	public LMAEliminacion() {
-		color = new Color(7, 115, 157);
+		color = new Color(0, 39, 56);
 		setBackground(color);
 		setLayout(new BoxLayout(LMAEliminacion.this,BoxLayout.X_AXIS));
 		cajaVertical = new JPanel();
