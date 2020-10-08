@@ -41,7 +41,7 @@ public class LaminaMenuCliente extends JPanel{
 	
 	public LaminaMenuCliente(JFrame marcoP) {
 		laminaServicio = new PagoServicios();
-		lmaTDirecta = new ModeloTransfer(new oyenteTDirecta(),"TRANSFERENCIA DIERECTA");
+		lmaTDirecta = new ModeloTransfer(new oyenteTDirecta(),"TRANSFERENCIA DIRECTA");
 		lmaTInterB = new ModeloTransfer(new oyenteTInter(),"TRANSFERENCIA INTER BANCARIA");
 		laminaDeposito = new ModeloMovimientoD(new oyenteMDeposito(),"DEPOSITO DE DINERO","DEPOSITAR");
 		laminaRetiro = new ModeloMovimientoD(new oyenteMRetiro(),"RETIRO DE DINERO","RETIRAR");
