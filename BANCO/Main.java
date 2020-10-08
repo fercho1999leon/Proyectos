@@ -1,11 +1,11 @@
 /*
-hugo cesar aguagallo carrillo
-washington fernando leon boada
-jaime eduardo alban marcillo
-ramirez uruchima cristina nicole
+HUGO CESAR AGUAGALLO CARRILLO
+WASHINGTON FERNANDO LEON BOADA
+JAIME EDUARDO ALBAN MARCILLO
+RAMIRES URUCHIMA CRISTINA NICOLE
 ISAI ITALO RIVAS AVILA
-Grupo 5
-Entidad Bancaria
+GRUPO 5
+ENTIDAD BANCARIA
 */
 import BASEDEDATOS.*;
 import interfazGrafica.marcoGUI.*;
