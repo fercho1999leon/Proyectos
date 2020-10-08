@@ -12,7 +12,7 @@ public class ModeloMovimientoD extends JPanel{
 	private JSpinner cantidad;
 	static int ancho = 10;
 	private Color color;
-	JPanel lmaPrincipal1,lmaPagoTarjeta1,lmaPagoCuenta1;
+	private JPanel lmaPrincipal1,lmaPagoTarjeta1,lmaPagoCuenta1;
 	final static String idPagoTarjeta = "PagoTarjeta";
 	final static String idPagoCuenta = "PagoCuenta";
 	private JTextField NumeroTarjeta1,ClaveTarjeta1,NumeroCuenta1;
