@@ -1,8 +1,9 @@
 /*
-	hugo cesar aguagallo carrillo
+hugo cesar aguagallo carrillo
 washington fernando leon boada
 jaime eduardo alban marcillo
 ramirez uruchima cristina nicole
+ISAI ITALO RIVAS AVILA
 Grupo 5
 Entidad Bancaria
 */

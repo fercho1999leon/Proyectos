@@ -187,6 +187,10 @@ public class LaminaMenuAdmin extends JPanel{
 			btnEliminacion.setContentAreaFilled(false);
 			btnEliminacion.setFocusable(false);
 			
+			btnConsulta.setVisible(false);
+			btnActualizacion.setVisible(false);
+			btnEliminacion.setVisible(false);
+			
 			btnCrear.setIcon(crearIcono("interfazGrafica/recursos/addUser.png",50,50));
 			btnCrear.setBorderPainted(false);
 			btnCrear.setContentAreaFilled(false);
@@ -316,6 +320,10 @@ public class LaminaMenuAdmin extends JPanel{
 				jlConsulta.setText("CONSULTAS DE DATOS");
 				jlActualizacion.setText("ACTUALIZACION DE DATOS");
 				jlEliminacion.setText("ELIMINACION DE DATOS");
+				btnConsulta.setVisible(true);
+				btnActualizacion.setVisible(true);
+				btnEliminacion.setVisible(true);
+				
 			}
 			public void mouseExited(MouseEvent e) {
 				btnCrear.setFocusable(false);
@@ -325,6 +333,9 @@ public class LaminaMenuAdmin extends JPanel{
 				jlConsulta.setText("");
 				jlActualizacion.setText("");
 				jlEliminacion.setText("");
+				btnConsulta.setVisible(false);
+				btnActualizacion.setVisible(false);
+				btnEliminacion.setVisible(false);
 			}
 		}
 	}

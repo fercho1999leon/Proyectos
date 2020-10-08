@@ -13,6 +13,7 @@ public class Infcliente extends Autentificacion{
 		Control=0;
 		ArrayList<Cuenta> dbCuentas = ClienteDatos.getCuentaDatos();
 		for (Cuenta c :  dbCuentas) {
+			print.append("\n**************************************************************");
 			print.append("\nNumero de cuenta: "+c.getNumeroCuenta());
 			print.append("\nTarjeta que pertenece a esta cuenta.");
 			print.append("\n-------------------------------------------------------------");
