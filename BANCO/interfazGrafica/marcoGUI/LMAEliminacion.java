@@ -120,6 +120,7 @@ public class LMAEliminacion extends JPanel{
 				int opc = tipoEliminacion.getSelectedIndex();
 				CardLayout c1 = (CardLayout)lmaPrincipal.getLayout();
 				if(opc == 0) {
+					c1.show(lmaPrincipal,idCliente);
 					clear();
 					lbTitulo.setText("ESTA SELECIONADO LA ELIMINACION DE CLIENTE");
 				}else if(opc == 1) {
@@ -239,7 +240,7 @@ public class LMAEliminacion extends JPanel{
 						if(validacion.AutentificacionTarjeta(nT, nClave, db)) {
 							Infcuenta consulta = new Infcuenta();
 							showInfo.setText("");
-							consulta.MostraDatos(nDNI, db, showInfo);
+							consulta.MostraDatos(validacion.getCuenta().getNumeroCuenta(), db, showInfo);
 							tarjeta = validacion.getTarjeta();
 							cuenta = validacion.getCuenta();
 							cliente = validacion.getClienteDatos();
